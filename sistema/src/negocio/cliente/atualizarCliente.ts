@@ -1,7 +1,6 @@
 import Entrada from "../../io/entrada";
 import Cliente from "../../modelo/cliente/cliente";
-import CPF from "../../modelo/cliente/cpf";
-import Atualiza from "./atualizar";
+import Atualiza from "../atualizar";
 
 export default class AtualizarCliente extends Atualiza {
     private clientes: Array<Cliente>;

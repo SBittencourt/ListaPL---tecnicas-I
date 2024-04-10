@@ -2,10 +2,11 @@ import Entrada from "../io/entrada";
 
 import Cliente from "../modelo/cliente/cliente";
 import Empresa from "../modelo/cliente/empresa";
-import Atualiza from "../negocio/cliente/atualizar";
+import Atualiza from "../negocio/atualizar";
 import AtualizarCliente from "../negocio/cliente/atualizarCliente";
 
 import CadastroCliente from "../negocio/cliente/cadastroCliente";
+import ExcluirCliente from "../negocio/cliente/excluirCliente";
 import ListagemClientes from "../negocio/cliente/listagemClientes";
 
 console.log(`Bem-vindo ao melhor sistema de gerenciamento de pet shops e clínicas veterinárias`)
@@ -81,6 +82,8 @@ function OpcoesCliente() {
                 break;
 
             case 4:
+                let excluir = new ExcluirCliente(empresa.getClientes)
+                excluir.excluir()
    
 
             case 0:
