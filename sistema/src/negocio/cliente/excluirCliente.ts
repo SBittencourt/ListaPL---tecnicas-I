@@ -23,6 +23,7 @@ export default class ExcluirCliente extends Excluir {
             }
         }
         ExcluirCliente(cpf)
+        console.log(`\ncliente excluído com sucesso!:)\n`);
         console.log(`--------------------------------------`);
     }
 }

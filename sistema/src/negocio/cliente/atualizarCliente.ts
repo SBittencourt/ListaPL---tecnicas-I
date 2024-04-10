@@ -29,7 +29,8 @@ export default class AtualizarCliente extends Atualiza {
             let novaDataEmissao = new Date(novoAno, novoMes, novoDia);
             cliente.nome = novoNome;
             cliente.nomeSocial = novoNomeSocial;
-            console.log(`\nCliente atualizado com sucesso!\n`);
+            console.log(`\nCliente atualizado com sucesso! :)\n`);
+            console.log(`--------------------------------------`);
         } else {
             console.log(`\nÍndice inválido. Cliente não encontrado.\n`);
         }

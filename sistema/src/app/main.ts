@@ -43,7 +43,7 @@ while (execucao) {
 
         case 0:
             execucao = false
-            console.log(`Até mais`)
+            console.log(`Até mais! :D`)
             break;
 
         default:
