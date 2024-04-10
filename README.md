@@ -18,11 +18,11 @@ Projeto desenvolvido para a aula de técnicas de programação I da FATEC-SJC, u
 
 | Lista | Status | Branch |
 |:-----:|:----------:|:---------:|
-| 1 | Em andamento | [Ver relatório](https://github.com/FocusQuest/FocusQuestAPI/tree/Sprint-1)  |
-| 2 | Não iniciado | [Ver relatório](https://github.com/FocusQuest/FocusQuestAPI/tree/Sprint-2) |  
-| 3 | Não iniciado | [Ver relatório](https://github.com/FocusQuest/FocusQuestAPI/tree/Sprint-3) | 
-| 4 | Não iniciado | [Ver relatório](https://github.com/FocusQuest/FocusQuestAPI/tree/Sprint-4) |
-| 5 | Não iniciado | [Ver relatório](https://github.com/FocusQuest/FocusQuestAPI/tree/Sprint-4) |
+| 1 | Em andamento | [Atv I](https://github.com/SBittencourt/ListaPL---tecnicas-I/tree/AtvI)  |
+| 2 | Não iniciado | [Atv II](https://github.com/SBittencourt/ListaPL---tecnicas-I/tree/AtvII) |  
+| 3 | Não iniciado | [Atv III](https://github.com/SBittencourt/ListaPL---tecnicas-I/tree/AtvIII) | 
+| 4 | Não iniciado | [Atv IV](https://github.com/SBittencourt/ListaPL---tecnicas-I/tree/AtvIV) |
+| 5 | Não iniciado | [Atv V](https://github.com/SBittencourt/ListaPL---tecnicas-I/tree/AtvV) |
 
 
 [➳ Retornar ao início](#Sumário)
