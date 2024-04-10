@@ -6,7 +6,7 @@
 ## Sumário
 
 - [Sobre o projeto](#Sobre-o-projeto)
-- [Listas](#Listas)
+- [Como executar](#Como-executar)
 
 
 ## Sobre o projeto
@@ -14,15 +14,16 @@
 Projeto desenvolvido para a aula de técnicas de programação I da FATEC-SJC, utilizando typescript e react.
 
 
-## Listas
+## Como executar
 
-| Lista | Status | Branch |
-|:-----:|:----------:|:---------:|
-| 1 | Em andamento | [Ver relatório](https://github.com/FocusQuest/FocusQuestAPI/tree/Sprint-1)  |
-| 2 | Não iniciado | [Ver relatório](https://github.com/FocusQuest/FocusQuestAPI/tree/Sprint-2) |  
-| 3 | Não iniciado | [Ver relatório](https://github.com/FocusQuest/FocusQuestAPI/tree/Sprint-3) | 
-| 4 | Não iniciado | [Ver relatório](https://github.com/FocusQuest/FocusQuestAPI/tree/Sprint-4) |
-| 5 | Não iniciado | [Ver relatório](https://github.com/FocusQuest/FocusQuestAPI/tree/Sprint-4) |
+Entre na pasta sistema e execute os seguintes comandos no terminal:
 
+### `npm install`
+
+### `npx tsc`
+
+### `code .\out\app\main.js`
+
+<hr>
 
 [➳ Retornar ao início](#Sumário)
