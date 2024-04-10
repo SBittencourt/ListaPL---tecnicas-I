@@ -15,6 +15,7 @@ export default class Cliente {
     private produtosConsumidos: Array<Produto>
     private servicosConsumidos: Array<Servico>
     private pets: Array<Pet>
+
     constructor(nome: string, nomeSocial: string, cpf: CPF) {
         this.nome = nome
         this.nomeSocial = nomeSocial

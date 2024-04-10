@@ -9,6 +9,7 @@ export default class Pet {
         this.raca = raca
         this.genero = genero
         this.tipo = tipo
+
     }
 
     public get getNome(){return this.nome}

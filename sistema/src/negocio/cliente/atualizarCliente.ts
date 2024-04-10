@@ -16,6 +16,8 @@ export default class AtualizarCliente extends Atualiza {
         console.log(`\nInício da atualização do cliente`);
 
         let indice = this.entrada.receberNumero(`Por favor informe o índice do cliente a ser atualizado: `);
+        indice -= 1;
+
         if (indice >= 0 && indice < this.clientes.length) {
             let cliente = this.clientes[indice];
             let novoNome = this.entrada.receberTexto(`Por favor informe o novo nome do cliente: `);
@@ -32,6 +34,7 @@ export default class AtualizarCliente extends Atualiza {
             console.log(`\nCliente atualizado com sucesso! :)\n`);
             console.log(`--------------------------------------`);
         } else {
-            console.log(`\nÍndice inválido. Cliente não encontrado.\n`);
+            console.log(`\nÍndice inválido. Cliente não encontrado. :(\n`);
         }
-    }}
+    }
+}

@@ -1,7 +1,7 @@
 import Entrada from "../io/entrada";
 
 import Cliente from "../modelo/cliente/cliente";
-import Empresa from "../modelo/cliente/empresa";
+import Empresa from "../modelo/empresa";
 import Atualiza from "../negocio/atualizar";
 import AtualizarCliente from "../negocio/cliente/atualizarCliente";
 
