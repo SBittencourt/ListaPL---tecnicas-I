@@ -1,6 +1,8 @@
 import Entrada from "../io/entrada";
+
 import Cliente from "../modelo/cliente/cliente";
 import Empresa from "../modelo/cliente/empresa";
+
 import CadastroCliente from "../negocio/cliente/cadastroCliente";
 import ListagemClientes from "../negocio/cliente/listagemClientes";
 
@@ -35,8 +37,6 @@ while (execucao) {
         case 4:
             OpcoesServicos()
             break;
-    
-
 
         case 0:
             execucao = false
@@ -64,20 +64,24 @@ function OpcoesCliente() {
 
         switch(opcao) { 
             case 1:
-
+                let cadastro = new CadastroCliente(empresa.getClientes)
+                cadastro.cadastrar()
                 break;
 
             case 2:
+                let listagem = new ListagemClientes(empresa.getClientes)
+                listagem.listar()
+                break;
 
             case 3:
+                
 
 
             case 4:
    
 
             case 0:
-                funcionando = false; // Atualize a variável funcionando
-                console.log(`Até mais`)
+                funcionando = false; 
                 break;
 
             default:
@@ -105,7 +109,6 @@ function OpcoesPet() {
         switch(opcao) { 
             case 1:
 
-                break;
 
             case 2:
 
