@@ -1,6 +1,6 @@
 import Cliente from "./cliente"
-import Produto from "./produto"
-import Servico from "./servico"
+import Produto from "../produto/produto"
+import Servico from "../servico/servico"
 
 export default class Empresa{
     private clientes: Array<Cliente>

@@ -1,8 +1,8 @@
 import Entrada from "../io/entrada";
-import Cliente from "../modelo/cliente";
-import Empresa from "../modelo/empresa";
-import CadastroCliente from "../negocio/cadastroCliente";
-import ListagemClientes from "../negocio/listagemClientes";
+import Cliente from "../modelo/cliente/cliente";
+import Empresa from "../modelo/cliente/empresa";
+import CadastroCliente from "../negocio/cliente/cadastroCliente";
+import ListagemClientes from "../negocio/cliente/listagemClientes";
 
 console.log(`Bem-vindo ao melhor sistema de gerenciamento de pet shops e clínicas veterinárias`)
 let empresa = new Empresa()
@@ -68,24 +68,135 @@ function OpcoesCliente() {
                 break;
 
             case 2:
-                let listagem = new ListagemClientes(empresa.getClientes)
-                listagem.listar()
-                break;
 
             case 3:
-                let atualizar = new AtualizarClientes(empresa.getClientes)
-                atualizar.listar()
-                break;
 
-            case 3:
-                let esxcluir = new excluirClientes(empresa.getClientes)
-                listagem.listar()
-                break;
+
+            case 4:
+   
 
             case 0:
                 funcionando = false; // Atualize a variável funcionando
                 console.log(`Até mais`)
                 break;
+
+            default:
+                console.log(`Operação não entendida :(`)
+        }
+    }
+}
+
+
+
+function OpcoesPet() {
+    let funcionando = true;
+
+    while (funcionando) {
+        console.log(`Selecione:`);
+        console.log(`1 - Criar cliente`);
+        console.log(`2 - Listar clientes`);
+        console.log(`3 - Atualizar cliente`);
+        console.log(`4 - Deletar cliente`);
+        console.log(`0 - Sair`);
+    
+        let entrada = new Entrada()
+        let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
+
+        switch(opcao) { 
+            case 1:
+
+                break;
+
+            case 2:
+
+
+            case 3:
+
+
+            case 4:
+
+
+            case 0:
+                funcionando = false; 
+                console.log(`Até mais`)
+                break;
+
+            default:
+                console.log(`Operação não entendida :(`)
+        }
+    }
+}
+
+
+function OpcoesProdutos() {
+    let funcionando = true;
+
+    while (funcionando) {
+        console.log(`Selecione:`);
+        console.log(`1 - Criar cliente`);
+        console.log(`2 - Listar clientes`);
+        console.log(`3 - Atualizar cliente`);
+        console.log(`4 - Deletar cliente`);
+        console.log(`0 - Sair`);
+    
+        let entrada = new Entrada()
+        let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
+
+        switch(opcao) { 
+            case 1:
+
+
+            case 2:
+
+
+            case 3:
+
+
+            case 4:
+        
+
+            case 0:
+                funcionando = false; 
+                console.log(`Até mais`)
+                break;
+
+            default:
+                console.log(`Operação não entendida :(`)
+        }
+    }
+}
+
+
+function OpcoesServicos() {
+    let funcionando = true;
+
+    while (funcionando) {
+        console.log(`Selecione:`);
+        console.log(`1 - Criar cliente`);
+        console.log(`2 - Listar clientes`);
+        console.log(`3 - Atualizar cliente`);
+        console.log(`4 - Deletar cliente`);
+        console.log(`0 - Sair`);
+    
+        let entrada = new Entrada()
+        let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
+
+        switch(opcao) { 
+            case 1:
+
+                break;
+
+            case 2:
+
+
+            case 3:
+
+
+            case 4:
+
+
+            case 0:
+
 
             default:
                 console.log(`Operação não entendida :(`)
