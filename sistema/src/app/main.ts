@@ -8,6 +8,8 @@ import AtualizarCliente from "../negocio/cliente/atualizarCliente";
 import CadastroCliente from "../negocio/cliente/cadastroCliente";
 import ExcluirCliente from "../negocio/cliente/excluirCliente";
 import ListagemClientes from "../negocio/cliente/listagemClientes";
+import CadastroPets from "../negocio/pet/cadastroPet";
+import ListagemPets from "../negocio/pet/listagemPets";
 
 console.log(`Bem-vindo ao melhor sistema de gerenciamento de pet shops e clínicas veterinárias`)
 let empresa = new Empresa()
@@ -115,19 +117,24 @@ function OpcoesPet() {
         switch(opcao) { 
             case 1:
 
+                break;
 
             case 2:
 
+                break;
 
             case 3:
-
+                let atualiza = new AtualizarCliente(empresa.getClientes)
+                atualiza.atualizar()
+                break;
 
             case 4:
-
+                let excluir = new ExcluirCliente(empresa.getClientes)
+                excluir.excluir()
+   
 
             case 0:
                 funcionando = false; 
-                console.log(`Até mais`)
                 break;
 
             default:
