@@ -2,6 +2,8 @@ import Entrada from "../io/entrada";
 
 import Cliente from "../modelo/cliente/cliente";
 import Empresa from "../modelo/cliente/empresa";
+import Atualiza from "../negocio/cliente/atualizar";
+import AtualizarCliente from "../negocio/cliente/atualizarCliente";
 
 import CadastroCliente from "../negocio/cliente/cadastroCliente";
 import ListagemClientes from "../negocio/cliente/listagemClientes";
@@ -74,8 +76,9 @@ function OpcoesCliente() {
                 break;
 
             case 3:
-                
-
+                let atualiza = new AtualizarCliente(empresa.getClientes)
+                atualiza.atualizar()
+                break;
 
             case 4:
    

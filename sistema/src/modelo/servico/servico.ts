@@ -1,3 +1,5 @@
-export default class Servico {
-    public nome!: string
+export default class servico {
+    public nome!: string;
+    public descriçao!: string;
+    public valor!: number;
 }
