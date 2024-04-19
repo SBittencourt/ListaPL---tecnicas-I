@@ -105,10 +105,10 @@ function OpcoesPet() {
 
     while (funcionando) {
         console.log(`Selecione:`);
-        console.log(`1 - Criar cliente`);
-        console.log(`2 - Listar clientes`);
-        console.log(`3 - Atualizar cliente`);
-        console.log(`4 - Deletar cliente`);
+        console.log(`1 - Criar pet`);
+        console.log(`2 - Listar pets`);
+        console.log(`3 - Atualizar pet`);
+        console.log(`4 - Deletar pet`);
         console.log(`0 - Sair`);
     
         let entrada = new Entrada()
@@ -116,7 +116,8 @@ function OpcoesPet() {
 
         switch(opcao) { 
             case 1:
-
+                let cadastro = new CadastroPets(empresa.getPets)
+                cadastro.cadastrar()
                 break;
 
             case 2:

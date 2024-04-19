@@ -14,9 +14,22 @@ export default class CadastroPets extends Cadastro {
 
     public cadastrar(): void {
         console.log(`\nInício do cadastro do pet`);
+        console.log(`\n-------------------------`);
+    
         let nome = this.entrada.receberTexto(`Por favor informe o nome do pet: `);
         let raca = this.entrada.receberTexto(`Por favor informe a raça do pet: `);
-
+        
+        let data: string | undefined = undefined; // Inicializamos como undefined
+        while (!data) {
+            let inputData = this.entrada.receberTexto(`Por favor informe a data de nascimento do pet (DD/MM/AAAA): `);
+            let regexData = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+            if (regexData.test(inputData)) {
+                data = inputData;
+            } else {
+                console.log("Formato de data inválido. Por favor, insira novamente.");
+            }
+        }
+        
         let genero = "";
         while (genero !== "Masculino" && genero !== "Feminino") {
             let generoOpcao = this.entrada.receberNumero(`Por favor informe o gênero do pet:\n1. Masculino\n2. Feminino\n`);
@@ -32,13 +45,13 @@ export default class CadastroPets extends Cadastro {
                     break;
             }
         }
-
+    
         let tipo = this.entrada.receberTexto(`Por favor informe o tipo do pet: `);
-
-        let pet = new Pet(nome, raca, genero, tipo);
+    
+        let pet = new Pet(nome, raca, data, genero, tipo);
         this.pets.push(pet);
-
-        console.log(`\nO cadastro do pet foi concluído :)\n`);
+    
+        console.log(`\nSeu pet foi cadastrado com sucesso! :)\n`);
         console.log(`--------------------------------------`);
     }
 }
