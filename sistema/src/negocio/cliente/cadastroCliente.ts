@@ -4,15 +4,19 @@ import CPF from "../../modelo/cliente/cpf";
 import Cadastro from "../cadastro";
 import Telefone from "../../modelo/cliente/telefone";
 import RG from "../../modelo/cliente/rg";
+import CadastroPets from "../pet/cadastroPet";
+import Pet from "../../modelo/pet/pet";
 
 export default class CadastroCliente extends Cadastro {
     private clientes: Array<Cliente>;
     private entrada: Entrada;
+    private cadastroPets: CadastroPets;
 
-    constructor(clientes: Array<Cliente>) {
+    constructor(clientes: Array<Cliente>, pets: Array<Pet>) {
         super();
         this.clientes = clientes;
         this.entrada = new Entrada();
+        this.cadastroPets = new CadastroPets(pets);
     }
 
     public cadastrar(): void {
@@ -57,5 +61,15 @@ export default class CadastroCliente extends Cadastro {
 
         console.log(`\nCadastro concluído :)\n`);
         console.log(`--------------------------------------`);
+
+        let cadastrarPets = this.entrada.receberTexto(`Deseja cadastrar pets para este cliente? (S/N): `);
+        if (cadastrarPets.toUpperCase() === 'S') {
+            let numPets = this.entrada.receberNumero(`Quantos pets deseja cadastrar para este cliente? `);
+            for (let i = 0; i < numPets; i++) {
+                console.log(`\nCadastro do Pet ${i + 1}`);
+                console.log(`-------------------`);
+                this.cadastroPets.cadastrar();
+            }
+        }
     }
 }

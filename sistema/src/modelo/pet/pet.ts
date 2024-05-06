@@ -1,4 +1,7 @@
 export default class Pet {
+    getDono() {
+        throw new Error("Method not implemented.")
+    }
     private nome: string
     private tipo: string
     private raca: string

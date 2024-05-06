@@ -67,10 +67,10 @@ function OpcoesCliente() {
         let entrada = new Entrada()
         let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
 
-        switch(opcao) { 
+        switch (opcao) {
             case 1:
-                let cadastro = new CadastroCliente(empresa.getClientes)
-                cadastro.cadastrar()
+                let cadastroCliente = new CadastroCliente(empresa.getClientes, empresa.getPets);
+                cadastroCliente.cadastrar();
                 break;
 
             case 2:
@@ -120,18 +120,7 @@ function OpcoesPet() {
                 cadastro.cadastrar()
                 break;
 
-            case 2:
-
-                break;
-
-            case 3:
-                let atualiza = new AtualizarCliente(empresa.getClientes)
-                atualiza.atualizar()
-                break;
-
             case 4:
-                let excluir = new ExcluirCliente(empresa.getClientes)
-                excluir.excluir()
    
 
             case 0:

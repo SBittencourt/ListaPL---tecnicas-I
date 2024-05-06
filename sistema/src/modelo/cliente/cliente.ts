@@ -3,6 +3,9 @@ import RG from "./rg";
 import Telefone from "./telefone";
 
 export default class Cliente {
+    getNome() {
+        throw new Error("Method not implemented.");
+    }
     public nome: string;
     public nomeSocial: string;
     private cpf: CPF;

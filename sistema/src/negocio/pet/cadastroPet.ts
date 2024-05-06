@@ -15,11 +15,12 @@ export default class CadastroPets extends Cadastro {
     public cadastrar(): void {
         console.log(`\nInício do cadastro do pet`);
         console.log(`\n-------------------------`);
-    
+
         let nome = this.entrada.receberTexto(`Por favor informe o nome do pet: `);
+        let tipo = this.entrada.receberTexto(`Por favor informe o tipo do pet: `);
         let raca = this.entrada.receberTexto(`Por favor informe a raça do pet: `);
         
-        let data: string | undefined = undefined; // Inicializamos como undefined
+        let data: string | undefined = undefined; 
         while (!data) {
             let inputData = this.entrada.receberTexto(`Por favor informe a data de nascimento do pet (DD/MM/AAAA): `);
             let regexData = /^(\d{2})\/(\d{2})\/(\d{4})$/;
@@ -30,23 +31,19 @@ export default class CadastroPets extends Cadastro {
             }
         }
         
-        let genero = "";
-        while (genero !== "Masculino" && genero !== "Feminino") {
-            let generoOpcao = this.entrada.receberNumero(`Por favor informe o gênero do pet:\n1. Masculino\n2. Feminino\n`);
-            switch (generoOpcao) {
-                case 1:
-                    genero = 'Masculino';
-                    break;
-                case 2:
-                    genero = 'Feminino';
-                    break;
-                default:
-                    console.log("Opção inválida. Por favor, insira novamente.");
-                    break;
+        let genero: string = "";
+        let generoOpcao: number;
+        do {
+            generoOpcao = this.entrada.receberNumero(`Por favor informe o gênero do pet:\n1. Masculino\n2. Feminino\n\nPrecione enter após escolher: `);
+            if (generoOpcao === 1) {
+                genero = 'Masculino';
+            } else if (generoOpcao === 2) {
+                genero = 'Feminino';
+            } else {
+                console.log("Opção inválida. Por favor, insira novamente.");
             }
-        }
+        } while (generoOpcao !== 1 && generoOpcao !== 2);
     
-        let tipo = this.entrada.receberTexto(`Por favor informe o tipo do pet: `);
     
         let pet = new Pet(nome, raca, data, genero, tipo);
         this.pets.push(pet);
