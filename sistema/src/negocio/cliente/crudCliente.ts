@@ -215,7 +215,36 @@ export default class CrudCliente extends Cadastro {
         }
     }
 
-
+    public listarClientes(): void {
+        console.log("\nLista de Clientes:");
+        console.log("---------------------------------");
+    
+        this.clientes.forEach((cliente, index) => {
+            console.log(`Cliente ${index + 1}:`);
+            console.log(`Nome: ${cliente.nome}`);
+            console.log(`CPF: ${cliente.getCpf()}`);
+            console.log(`Telefones:`);
+            cliente.getTelefones().forEach((telefone, i) => {
+                console.log(`   ${i + 1}: ${telefone.getNumero()}`);
+            });
+    
+            if (cliente.getPets().length > 0) {
+                console.log(`Pets:`);
+                cliente.getPets().forEach((pet, j) => {
+                    console.log(`   Pet ${j + 1}:`);
+                    console.log(`      Nome: ${pet.getNome()}`);
+                    console.log(`      Raça: ${pet.getRaca()}`);
+                    console.log(`      Tipo: ${pet.getTipo()}`);
+                    console.log(`      Gênero: ${pet.getGenero()}`);
+                });
+            } else {
+                console.log(`O cliente não possui pets cadastrados.`);
+            }
+    
+            console.log("---------------------------------");
+        });
+    }
+    
     
     
     

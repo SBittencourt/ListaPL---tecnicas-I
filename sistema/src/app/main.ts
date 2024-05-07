@@ -75,6 +75,12 @@ function OpcoesCliente() {
                 break
 
             case 2:
+                let listarClientes = new CrudCliente(empresa.getClientes, empresa.getProdutos, empresa.getServicos, empresa.getPets);
+                listarClientes.listarClientes();
+                break;
+                
+                
+
 
 
             case 3:
