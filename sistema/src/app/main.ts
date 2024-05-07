@@ -1,8 +1,8 @@
 import Entrada from "../io/entrada";
 import Empresa from "../modelo/empresa";
-import crudProduto from "../negocio/produto/crudProduto";
 
-import cadastrarProduto from "../negocio/produto/crudProduto";
+import CrudPet from "../negocio/pet/crudPet";
+import crudProduto from "../negocio/produto/crudProduto";
 import CrudServico from "../negocio/serviço/crudServico";
 
 
@@ -102,13 +102,24 @@ function OpcoesPet() {
 
         switch(opcao) { 
             case 1:
+                let cadastroPet = new CrudPet(empresa.getPets);
+                cadastroPet.cadastrar();
+                break
 
             case 2:
+                let listarPet = new CrudPet(empresa.getPets);
+                listarPet.listarPets();
+                break
 
             case 3:
+                let atualizarPet = new CrudPet(empresa.getPets);
+                atualizarPet.editarPet();
+                break
 
             case 4:
-   
+                let excluirPet = new CrudPet(empresa.getPets);
+                excluirPet.excluirPet();
+                break  
 
             case 0:
                 funcionando = false; 

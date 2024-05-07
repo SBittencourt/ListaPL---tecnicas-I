@@ -15,31 +15,35 @@ export default class Pet {
         this.tipo = tipo
     }
 
-    public get getNome(): string {
-        return this.nome
+    public getNome(): string {
+        return this.nome;
     }
-    public get getTipo(): string {
-        return this.tipo
-    }
-    public get getRaca(): string {
-        return this.raca
-    }
-    public get getGenero(): string {
-        return this.genero
-    }
-
 
     public setNome(nome: string): void {
         this.nome = nome;
     }
-    public setTipo(tipo: string): void {
-        this.tipo = tipo;
+
+    public getRaca(): string {
+        return this.raca;
     }
+
     public setRaca(raca: string): void {
         this.raca = raca;
     }
+
+    public getTipo(): string {
+        return this.tipo;
+    }
+
+    public setTipo(tipo: string): void {
+        this.tipo = tipo;
+    }
+
+    public getGenero(): string {
+        return this.genero;
+    }
+
     public setGenero(genero: string): void {
         this.genero = genero;
     }
-    
 }
