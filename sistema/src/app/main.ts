@@ -17,6 +17,7 @@ while (execucao) {
     console.log(`2 - Pet`);
     console.log(`3 - Produtos`);
     console.log(`4 - Serviços`);
+    console.log(`5 - Listagens`);
     console.log(`0 - Sair`);
 
     let entrada = new Entrada()
@@ -37,6 +38,11 @@ while (execucao) {
 
         case 4:
             OpcoesServicos()
+            break;
+
+        
+        case 5:
+            OpcoesListagem()
             break;
 
         case 0:
@@ -213,6 +219,43 @@ function OpcoesServicos() {
                 excluirServico.excluirServico();
                 break;
                 
+            case 0:
+                funcionando = false; 
+                break;
+
+            default:
+                console.log(`Operação não entendida :(`)
+        }
+    }
+}
+
+function OpcoesListagem() {
+    let funcionando = true;
+
+    while (funcionando) {
+        console.log(`Selecione:`);
+        console.log(`1 - Top 10 clientes que mais consumiram`);
+        console.log(`2 - Produtos e serviços mais vendidos`);
+        console.log(`3 - Mais vendidos por raça e tipo de pet`);
+        console.log(`0 - Sair`);
+    
+        let entrada = new Entrada()
+        let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
+
+        switch (opcao) {
+            case 1:
+
+
+            case 2:
+
+
+            case 3:
+
+
+            case 4:
+
+   
+
             case 0:
                 funcionando = false; 
                 break;
