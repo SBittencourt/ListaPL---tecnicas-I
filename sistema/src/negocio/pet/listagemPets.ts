@@ -1,5 +1,5 @@
-import Pet from "../../modelo/pet/pet";
-import Listagem from "../listagem";
+import Pet from "../../modelo/pet";
+import Listagem from "../geral/listagem";
 
 export default class ListagemPets extends Listagem {
     private pets: Array<Pet>

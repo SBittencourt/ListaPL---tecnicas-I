@@ -1,17 +1,12 @@
 import Entrada from "../io/entrada";
-
-import Cliente from "../modelo/cliente/cliente";
 import Empresa from "../modelo/empresa";
-import Atualiza from "../negocio/atualizar";
-import AtualizarCliente from "../negocio/cliente/atualizarCliente";
+import crudProduto from "../negocio/produto/crudProduto";
 
-import CadastroCliente from "../negocio/cliente/cadastroCliente";
-import ExcluirCliente from "../negocio/cliente/excluirCliente";
-import ListagemClientes from "../negocio/cliente/listagemClientes";
-import CadastroPets from "../negocio/pet/cadastroPet";
-import ListagemPets from "../negocio/pet/listagemPets";
+import cadastrarProduto from "../negocio/produto/crudProduto";
 
-console.log(`Bem-vindo ao melhor sistema de gerenciamento de pet shops e clínicas veterinárias`)
+
+
+console.log(`Bem-vindo ao melhor sistema de gerenciamento de pet shops e clínicas veterinárias, a PetLovers!`)
 let empresa = new Empresa()
 let execucao = true
 
@@ -24,7 +19,7 @@ while (execucao) {
     console.log(`0 - Sair`);
 
     let entrada = new Entrada()
-    let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
+    let opcao = entrada.receberNumero(`Para começar, por favor, escolha uma opção: `)
 
     switch (opcao) {
         case 1:
@@ -47,9 +42,6 @@ while (execucao) {
             execucao = false
             console.log(`Até mais! :D`)
             break;
-
-        default:
-            console.log(`Operação não entendida :(`)
     }
 }
 
@@ -58,7 +50,7 @@ function OpcoesCliente() {
 
     while (funcionando) {
         console.log(`Selecione:`);
-        console.log(`1 - Criar cliente`);
+        console.log(`1 - Cadastrar cliente`);
         console.log(`2 - Listar clientes`);
         console.log(`3 - Atualizar cliente`);
         console.log(`4 - Deletar cliente`);
@@ -69,23 +61,16 @@ function OpcoesCliente() {
 
         switch (opcao) {
             case 1:
-                let cadastroCliente = new CadastroCliente(empresa.getClientes, empresa.getPets);
-                cadastroCliente.cadastrar();
-                break;
+
 
             case 2:
-                let listagem = new ListagemClientes(empresa.getClientes)
-                listagem.listar()
-                break;
+
 
             case 3:
-                let atualiza = new AtualizarCliente(empresa.getClientes)
-                atualiza.atualizar()
-                break;
+
 
             case 4:
-                let excluir = new ExcluirCliente(empresa.getClientes)
-                excluir.excluir()
+
    
 
             case 0:
@@ -105,7 +90,7 @@ function OpcoesPet() {
 
     while (funcionando) {
         console.log(`Selecione:`);
-        console.log(`1 - Criar pet`);
+        console.log(`1 - Cadastrar pet`);
         console.log(`2 - Listar pets`);
         console.log(`3 - Atualizar pet`);
         console.log(`4 - Deletar pet`);
@@ -116,9 +101,10 @@ function OpcoesPet() {
 
         switch(opcao) { 
             case 1:
-                let cadastro = new CadastroPets(empresa.getPets)
-                cadastro.cadastrar()
-                break;
+
+            case 2:
+
+            case 3:
 
             case 4:
    
@@ -139,10 +125,10 @@ function OpcoesProdutos() {
 
     while (funcionando) {
         console.log(`Selecione:`);
-        console.log(`1 - Criar cliente`);
-        console.log(`2 - Listar clientes`);
-        console.log(`3 - Atualizar cliente`);
-        console.log(`4 - Deletar cliente`);
+        console.log(`1 - Cadastrar produto`);
+        console.log(`2 - Listar produtos`);
+        console.log(`3 - Atualizar produtos`);
+        console.log(`4 - Deletar produto`);
         console.log(`0 - Sair`);
     
         let entrada = new Entrada()
@@ -150,20 +136,27 @@ function OpcoesProdutos() {
 
         switch(opcao) { 
             case 1:
-
+                let cadastroProduto = new crudProduto(empresa.getProdutos);
+                cadastroProduto.cadastrar();
+                break;
 
             case 2:
-
+                let listarProdutos = new crudProduto(empresa.getProdutos);
+                listarProdutos.listarProdutos();
+                break;
 
             case 3:
-
+                let editarProduto = new crudProduto(empresa.getProdutos);
+                editarProduto.editarProduto();
+                break;
 
             case 4:
-        
-
+                let excluirProduto = new crudProduto(empresa.getProdutos);
+                excluirProduto.excluirProduto();
+                break;
+                
             case 0:
                 funcionando = false; 
-                console.log(`Até mais`)
                 break;
 
             default:
@@ -178,10 +171,10 @@ function OpcoesServicos() {
 
     while (funcionando) {
         console.log(`Selecione:`);
-        console.log(`1 - Criar cliente`);
-        console.log(`2 - Listar clientes`);
-        console.log(`3 - Atualizar cliente`);
-        console.log(`4 - Deletar cliente`);
+        console.log(`1 - Cadastrar serviço`);
+        console.log(`2 - Listar serviços`);
+        console.log(`3 - Atualizar serviços`);
+        console.log(`4 - Deletar serviço`);
         console.log(`0 - Sair`);
     
         let entrada = new Entrada()
@@ -202,7 +195,8 @@ function OpcoesServicos() {
 
 
             case 0:
-
+                funcionando = false; 
+                break;
 
             default:
                 console.log(`Operação não entendida :(`)
