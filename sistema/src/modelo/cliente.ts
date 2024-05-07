@@ -9,61 +9,61 @@ export default class Cliente {
     public nome: string;
     public nomeSocial: string;
     private cpf: CPF;
-    private rg: Array<RG>;
+    private rg: RG;
     private dataCadastro: Date;
     private telefones: Array<Telefone>;
     private produtosConsumidos: Array<Produto>;
     private servicosConsumidos: Array<Servico>;
     private pets: Array<Pet>;
 
-    constructor(nome: string, nomeSocial: string, cpf: CPF) {
+    constructor(nome: string, nomeSocial: string, cpf: CPF, rg: RG, telefones: Array<Telefone>) {
         this.nome = nome;
         this.nomeSocial = nomeSocial;
         this.cpf = cpf;
-        this.rg = [];
+        this.rg = rg;
         this.dataCadastro = new Date();
-        this.telefones = [];
+        this.telefones = telefones;
         this.produtosConsumidos = [];
         this.servicosConsumidos = [];
         this.pets = [];
     }
 
-    public get getCpf(): CPF {
+    public getNome(): string {
+        return this.nome;
+    }
+
+    public getCpf(): CPF {
         return this.cpf;
     }
 
-    public get getRgs(): Array<RG> {
-        return this.rg;
-    }
-
-    public get getDataCadastro(): Date {
+    public getDataCadastro(): Date {
         return this.dataCadastro;
     }
 
-    public get getTelefones(): Array<Telefone> {
+    public getTelefones(): Array<Telefone> {
         return this.telefones;
     }
 
-    public get getProdutosConsumidos(): Array<Produto> {
+    public getProdutosConsumidos(): Array<Produto> {
         return this.produtosConsumidos;
     }
 
-    public get getServicosConsumidos(): Array<Servico> {
+    public getServicosConsumidos(): Array<Servico> {
         return this.servicosConsumidos;
     }
 
-    public get getPets(): Array<Pet> {
+    public getPets(): Array<Pet> {
         return this.pets;
     }
-
-
 
     public addProdutoConsumido(produto: Produto): void {
         this.produtosConsumidos.push(produto);
     }
+
     public addServicoConsumido(servico: Servico): void {
         this.servicosConsumidos.push(servico);
     }
+
     public addPet(pet: Pet): void {
         this.pets.push(pet);
     }
