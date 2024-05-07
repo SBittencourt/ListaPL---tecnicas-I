@@ -13,7 +13,7 @@ export default class CrudPet extends Cadastro {
     }
 
     public cadastrar(): void {
-        console.log(`\nInício do cadastro de pet`);
+        console.log(`\nInício do cadastro de pet:`);
         let nome = this.entrada.receberTexto(`Informe o nome do pet: `);
         let raca = this.entrada.receberTexto(`Informe a raça: `);
         let tipo = this.entrada.receberTexto('Informe o tipo de animal: ');

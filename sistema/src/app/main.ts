@@ -1,6 +1,7 @@
 import Entrada from "../io/entrada";
 import Empresa from "../modelo/empresa";
 
+import CrudCliente from "../negocio/cliente/crudCliente";
 import CrudPet from "../negocio/pet/crudPet";
 import crudProduto from "../negocio/produto/crudProduto";
 import CrudServico from "../negocio/serviço/crudServico";
@@ -61,6 +62,7 @@ function OpcoesCliente() {
         console.log(`2 - Listar clientes`);
         console.log(`3 - Atualizar cliente`);
         console.log(`4 - Deletar cliente`);
+        console.log(`5 - Consumo por cliente`);
         console.log(`0 - Sair`);
     
         let entrada = new Entrada()
@@ -68,7 +70,9 @@ function OpcoesCliente() {
 
         switch (opcao) {
             case 1:
-
+                let cadastroCliente = new CrudCliente(empresa.getClientes, empresa.getProdutos, empresa.getServicos, empresa.getPets);
+                cadastroCliente.cadastrar();
+                break
 
             case 2:
 
@@ -250,9 +254,6 @@ function OpcoesListagem() {
 
 
             case 3:
-
-
-            case 4:
 
    
 
