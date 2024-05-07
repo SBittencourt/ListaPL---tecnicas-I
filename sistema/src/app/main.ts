@@ -3,6 +3,7 @@ import Empresa from "../modelo/empresa";
 import crudProduto from "../negocio/produto/crudProduto";
 
 import cadastrarProduto from "../negocio/produto/crudProduto";
+import CrudServico from "../negocio/serviço/crudServico";
 
 
 
@@ -182,18 +183,25 @@ function OpcoesServicos() {
 
         switch(opcao) { 
             case 1:
-
+                let cadastroServico = new CrudServico(empresa.getServicos);
+                cadastroServico.cadastrar();
                 break;
 
             case 2:
-
+                let listarServicos = new CrudServico(empresa.getServicos);
+                listarServicos.listarServicos();
+                break;
 
             case 3:
-
+                let editarServico = new CrudServico(empresa.getServicos);
+                editarServico.editarServico();
+                break;
 
             case 4:
-
-
+                let excluirServico = new CrudServico(empresa.getServicos);
+                excluirServico.excluirServico();
+                break;
+                
             case 0:
                 funcionando = false; 
                 break;
