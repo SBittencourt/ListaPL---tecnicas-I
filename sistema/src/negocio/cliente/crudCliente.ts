@@ -486,6 +486,7 @@ export default class CrudCliente extends Cadastro {
             Object.entries(consumo.produtos).slice(0, 3).forEach(([nome, quantidade], index) => {
                 console.log(`${index + 1}. ${nome} - Quantidade: ${quantidade}`);
             });
+            console.log("---------------------------------");
         });
     }
     
