@@ -351,6 +351,8 @@ export default class CrudCliente extends Cadastro {
                 break;
         }
     }
+
+    
     
     public ConsumoClientes(): void {
         console.log("\nRelatório de Consumo dos Clientes:");
@@ -369,9 +371,19 @@ export default class CrudCliente extends Cadastro {
                 console.log(`Nome: ${cliente.nome}`);
             }
             console.log(`Total Gasto: R$ ${cliente.calcularTotalGasto().toFixed(2)}`);
+            console.log(`Produtos Consumidos:`);
+            cliente.getProdutosConsumidos().forEach((produto, i) => {
+                console.log(`   ${i + 1}: ${produto.nome} - R$ ${produto.preco.toFixed(2)}`);
+            });
+            console.log(`Serviços Consumidos:`);
+            cliente.getServicosConsumidos().forEach((servico, i) => {
+                console.log(`   ${i + 1}: ${servico.nome} - R$ ${servico.preco.toFixed(2)}`);
+            });
             console.log("---------------------------------");
         });
     }
+    
+    
     
 
 }

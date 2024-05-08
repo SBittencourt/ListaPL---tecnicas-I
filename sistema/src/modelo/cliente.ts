@@ -11,12 +11,12 @@ export default class Cliente {
     private cpf: CPF;
     private rg: RG;
     private dataCadastro: Date;
-    private telefones: Array<Telefone>;
-    private produtosConsumidos: Array<Produto>;
-    private servicosConsumidos: Array<Servico>;
-    private pets: Array<Pet>;
+    private telefones: Telefone[];
+    private produtosConsumidos: Produto[];
+    private servicosConsumidos: Servico[];
+    private pets: Pet[];
 
-    constructor(nome: string, nomeSocial: string, cpf: CPF, rg: RG, telefones: Array<Telefone>) {
+    constructor(nome: string, nomeSocial: string, cpf: CPF, rg: RG, telefones: Telefone[]) {
         this.nome = nome;
         this.nomeSocial = nomeSocial;
         this.cpf = cpf;
@@ -40,19 +40,19 @@ export default class Cliente {
         return this.dataCadastro;
     }
 
-    public getTelefones(): Array<Telefone> {
+    public getTelefones(): Telefone[] {
         return this.telefones;
     }
 
-    public getProdutosConsumidos(): Array<Produto> {
+    public getProdutosConsumidos(): Produto[] {
         return this.produtosConsumidos;
     }
 
-    public getServicosConsumidos(): Array<Servico> {
+    public getServicosConsumidos(): Servico[] {
         return this.servicosConsumidos;
     }
 
-    public getPets(): Array<Pet> {
+    public getPets(): Pet[] {
         return this.pets;
     }
 
@@ -80,22 +80,9 @@ export default class Cliente {
         this.telefones = telefonesList;
     }
 
-    public limparPets(): void {
-        this.pets = [];
-    }
-    
-
     public calcularTotalGasto(): number {
-        let total = 0;
-
-        this.produtosConsumidos.forEach(produto => {
-            total += produto.preco;
-        });
-
-        this.servicosConsumidos.forEach(servico => {
-            total += servico.preco;
-        });
-
-        return total;
+        const totalProdutos = this.produtosConsumidos.reduce((acc, produto) => acc + produto.preco, 0);
+        const totalServicos = this.servicosConsumidos.reduce((acc, servico) => acc + servico.preco, 0);
+        return totalProdutos + totalServicos;
     }
 }
