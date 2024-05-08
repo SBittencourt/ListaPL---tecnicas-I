@@ -7,6 +7,7 @@ import Produto from "../../modelo/produto";
 import Servico from "../../modelo/servico";
 import RG from "../../modelo/rg";
 import Telefone from "../../modelo/telefone";
+import CrudPet from "../pet/crudPet";
 
 export default class CrudCliente extends Cadastro {
     private clientes: Array<Cliente>;
@@ -69,21 +70,23 @@ export default class CrudCliente extends Cadastro {
     
         console.log(`\nO cliente foi cadastrado com sucesso! :D\n`);
         console.log(`--------------------------------------------------`);
+
+
     
         this.associarProdutosConsumidos(cliente); 
         this.associarServicosConsumidos(cliente); 
     
-        let cadastrarMaisPet = this.entrada.receberTexto(`Deseja cadastrar um novo pet para o cliente? (S/N): `);
-        while (cadastrarMaisPet.toUpperCase() === 'S') {
-            this.cadastrarPet(cliente);
-            cadastrarMaisPet = this.entrada.receberTexto(`Deseja cadastrar mais um pet para o cliente? (S/N): `);
-        }
-    
         let escolherPet = this.entrada.receberTexto(`O cliente já possui um pet registrado no sistema? (S/N): `);
         if (escolherPet.toUpperCase() === 'S') {
             this.associarPetExistente(cliente);
+        } else {
+            let cadastrarPet = this.entrada.receberTexto(`Deseja cadastrar um novo pet para o cliente? (S/N): `);
+            if (cadastrarPet.toUpperCase() === 'S') {
+                const crudPet = new CrudPet(this.petsCadastrados);
+                crudPet.cadastrar();
+            }
         }
-    
+        
         let cadastrarMais = this.entrada.receberTexto(`Deseja cadastrar mais um cliente? (S/N): `);
         if (cadastrarMais.toUpperCase() === 'S') {
             this.cadastrar(); 
@@ -220,6 +223,17 @@ export default class CrudCliente extends Cadastro {
         console.log("\nLista de Clientes:");
         console.log("---------------------------------");
     
+        if (this.clientes.length === 0) {
+            console.log("Não existem clientes cadastrados.");
+            let cadastrarNovo = this.entrada.receberTexto("Deseja cadastrar um novo cliente? (S/N): ");
+            if (cadastrarNovo.toUpperCase() === 'S') {
+                this.cadastrar();
+                return;
+            } else {
+                return;
+            }
+        }
+    
         this.clientes.forEach((cliente, index) => {
             console.log(`Cliente ${index + 1}:`);
             console.log(`Nome: ${cliente.nome}`);
@@ -246,49 +260,53 @@ export default class CrudCliente extends Cadastro {
         });
     }
     
+    
     public atualizarCliente(): void {
-        console.log("\nAtualização de Cliente:");
-        console.log("---------------------------------");
+        console.log(`\nEdição de Cliente:`);
+        console.log(`---------------------------------`);
+    
+        if (this.clientes.length === 0) {
+            console.log(`Ainda não existem clientes cadastrados para editar.\n`);
+            return;
+        }
     
         this.listarClientes();
     
-        let indiceCliente = this.entrada.receberNumero("Escolha o número do cliente que deseja editar:");
+        let indiceCliente = this.entrada.receberNumero(`Informe o número do cliente que deseja editar: `);
         if (indiceCliente < 1 || indiceCliente > this.clientes.length) {
-            console.log("Índice de cliente inválido.");
+            console.log(`Índice de cliente inválido.\n`);
             return;
         }
-        let cliente = this.clientes[indiceCliente - 1];
     
-        console.log("Escolha a informação que deseja editar:");
-        console.log("1. Nome");
-        console.log("2. Nome Social");
-        console.log("3. Telefones");
-        console.log("4. Pets");
-        let opcao = this.entrada.receberNumero("Escolha a opção:");
+        let clienteSelecionado = this.clientes[indiceCliente - 1];
+    
+        console.log(`\nEdição do Cliente "${clienteSelecionado.nome}":`);
+        console.log(`1- Editar nome`);
+        console.log(`2- Editar nome social`);
+        console.log(`3- Editar telefones`);
+        console.log(`4- Editar pets`);
+    
+        let opcao = this.entrada.receberNumero(`Escolha a opção desejada: `);
     
         switch (opcao) {
             case 1:
-                let novoNome = this.entrada.receberTexto("Digite o novo nome:");
-                cliente.setNome(novoNome);
-                console.log("Nome atualizado com sucesso!");
+                let novoNome = this.entrada.receberTexto(`Informe o novo nome do cliente (atual: ${clienteSelecionado.nome}): `);
+                clienteSelecionado.nome = novoNome;
+                console.log(`Nome do cliente atualizado com sucesso!\n`);
                 break;
-    
             case 2:
-                let novoNomeSocial = this.entrada.receberTexto("Digite o novo nome social:");
-                cliente.setNomeSocial(novoNomeSocial);
-                console.log("Nome social atualizado com sucesso!");
+                let novoNomeSocial = this.entrada.receberTexto(`Informe o novo nome social do cliente (atual: ${clienteSelecionado.nomeSocial}): `);
+                clienteSelecionado.nomeSocial = novoNomeSocial;
+                console.log(`Nome social do cliente atualizado com sucesso!\n`);
                 break;
-    
             case 3:
-                this.atualizarTelefones(cliente);
+                this.atualizarTelefones(clienteSelecionado);
                 break;
-    
             case 4:
-                this.atualizarPets(cliente);
+                this.atualizarPets(clienteSelecionado);
                 break;
-    
             default:
-                console.log("Opção inválida.");
+                console.log(`Opção inválida.\n`);
                 break;
         }
     }

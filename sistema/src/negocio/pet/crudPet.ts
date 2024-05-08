@@ -11,7 +11,7 @@ export default class CrudPet extends Cadastro {
         this.pets = pets;
         this.entrada = new Entrada();
     }
-
+    
     public cadastrar(): void {
         console.log(`\nInício do cadastro de pet:`);
         let nome = this.entrada.receberTexto(`Informe o nome do pet: `);
@@ -24,6 +24,8 @@ export default class CrudPet extends Cadastro {
         console.log(`\nO pet foi cadastrado com sucesso! :D\n`);
         console.log(`---------------------------------`);
     }
+
+    
 
     private selecionarGenero(): string {
         console.log(`Selecione o gênero do pet:`);

@@ -6,15 +6,6 @@ import Servico from "./servico";
 import Telefone from "./telefone";
 
 export default class Cliente {
-    setTelefones(telefonesList: Telefone[]) {
-        throw new Error("Method not implemented.");
-    }
-    setNome(novoNome: string) {
-        throw new Error("Method not implemented.");
-    }
-    limparPets() {
-        throw new Error("Method not implemented.");
-    }
     public nome: string;
     public nomeSocial: string;
     private cpf: CPF;
@@ -80,4 +71,17 @@ export default class Cliente {
     public setNomeSocial(novoNomeSocial: string): void {
         this.nomeSocial = novoNomeSocial;
     }
+
+    public setNome(novoNome: string): void {
+        this.nome = novoNome;
+    }
+
+    public setTelefones(telefonesList: Telefone[]): void {
+        this.telefones = telefonesList;
+    }
+
+    public limparPets(): void {
+        this.pets = [];
+    }
+    
 }
