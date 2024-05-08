@@ -116,19 +116,6 @@ export default class CrudCliente extends Cadastro {
         }
     }
 
-    private cadastrarPet(cliente: Cliente): void {
-        console.log(`\nInício do cadastro de pet:`);
-        let nome = this.entrada.receberTexto(`Informe o nome do pet: `);
-        let raca = this.entrada.receberTexto(`Informe a raça: `);
-        let tipo = this.entrada.receberTexto('Informe o tipo de animal: ');
-        let genero = this.selecionarGenero();
-        let pet = new Pet(nome, raca, genero, tipo);
-
-        cliente.addPet(pet);
-
-        console.log(`\nO pet foi cadastrado com sucesso! :D\n`);
-        console.log(`---------------------------------`);
-    }
 
     private associarPetExistente(cliente: Cliente): void {
         console.log(`\nEscolha um pet existente para associar ao cliente:`);
@@ -192,23 +179,6 @@ export default class CrudCliente extends Cadastro {
         console.log(`---------------------------------`);
     }
 
-    private selecionarGenero(): string {
-        console.log(`Selecione o gênero do pet:`);
-        console.log(`1 - Feminino`);
-        console.log(`2 - Masculino`);
-        let opcao = this.entrada.receberNumero(`Escolha a opção: `);
-
-        switch (opcao) {
-            case 1:
-                return 'Feminino';
-            case 2:
-                return 'Masculino';
-            default:
-                console.log(`Opção inválida. Usando gênero não especificado.`);
-                return 'Não especificado';
-        }
-    }
-
 
     public listarClientes(): void {
         console.log("\nLista de Clientes:");
@@ -251,9 +221,12 @@ export default class CrudCliente extends Cadastro {
                 console.log(`O cliente não possui pets cadastrados.`);
             }
     
+            console.log(`Total Gasto: R$ ${cliente.calcularTotalGasto().toFixed(2)}`);
+    
             console.log("---------------------------------");
         });
     }
+    
     
     
     
@@ -348,6 +321,35 @@ export default class CrudCliente extends Cadastro {
     
         let clienteExcluido = this.clientes.splice(indiceCliente - 1, 1);
         console.log(`Cliente ${clienteExcluido[0].nome} excluído com sucesso!`);
+    }
+    
+    public associarItensClienteExistente(): void {
+        this.listarClientes();
+        let indiceCliente = this.entrada.receberNumero(`Informe o número do cliente que deseja associar itens (produtos ou serviços): `);
+        if (indiceCliente < 1 || indiceCliente > this.clientes.length) {
+            console.log(`Índice de cliente inválido.`);
+            return;
+        }
+    
+        let clienteSelecionado = this.clientes[indiceCliente - 1];
+    
+        console.log(`Escolha o tipo de item a ser associado:`);
+        console.log(`1- Produto`);
+        console.log(`2- Serviço`);
+        
+        let opcao = this.entrada.receberNumero(`Opção: `);
+        
+        switch (opcao) {
+            case 1:
+                this.associarProdutosConsumidos(clienteSelecionado);
+                break;
+            case 2:
+                this.associarServicosConsumidos(clienteSelecionado);
+                break;
+            default:
+                console.log(`Opção inválida.`);
+                break;
+        }
     }
     
     

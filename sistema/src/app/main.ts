@@ -61,8 +61,9 @@ function OpcoesCliente() {
         console.log(`1 - Cadastrar cliente`);
         console.log(`2 - Listar clientes`);
         console.log(`3 - Atualizar cliente & adicionar pet`);
-        console.log(`4 - Deletar cliente`);
-        console.log(`5 - Consumo por cliente`);
+        console.log(`4 - Registrar novo consumo pelo cliente`);
+        console.log(`5 - Deletar cliente`);
+        console.log(`6 - Consumo por cliente`);
         console.log(`0 - Sair`);
     
         let entrada = new Entrada()
@@ -85,6 +86,11 @@ function OpcoesCliente() {
                 break;
 
             case 4:
+                let associarItensClienteExistente = new CrudCliente(empresa.getClientes, empresa.getProdutos, empresa.getServicos, empresa.getPets);
+                associarItensClienteExistente.associarItensClienteExistente();
+                break;
+
+            case 5:
                 let excluirCliente = new CrudCliente(empresa.getClientes, empresa.getProdutos, empresa.getServicos, empresa.getPets);
                 excluirCliente.excluirCliente();
                 break;

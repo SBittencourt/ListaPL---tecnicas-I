@@ -84,4 +84,18 @@ export default class Cliente {
         this.pets = [];
     }
     
+
+    public calcularTotalGasto(): number {
+        let total = 0;
+
+        this.produtosConsumidos.forEach(produto => {
+            total += produto.preco;
+        });
+
+        this.servicosConsumidos.forEach(servico => {
+            total += servico.preco;
+        });
+
+        return total;
+    }
 }
