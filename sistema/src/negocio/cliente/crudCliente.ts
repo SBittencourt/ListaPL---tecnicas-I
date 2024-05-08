@@ -215,6 +215,7 @@ export default class CrudCliente extends Cadastro {
         }
     }
 
+
     public listarClientes(): void {
         console.log("\nLista de Clientes:");
         console.log("---------------------------------");
@@ -222,7 +223,7 @@ export default class CrudCliente extends Cadastro {
         this.clientes.forEach((cliente, index) => {
             console.log(`Cliente ${index + 1}:`);
             console.log(`Nome: ${cliente.nome}`);
-            console.log(`CPF: ${cliente.getCpf()}`);
+            console.log(`CPF: ${cliente.getCpf().getValor}`);
             console.log(`Telefones:`);
             cliente.getTelefones().forEach((telefone, i) => {
                 console.log(`   ${i + 1}: ${telefone.getNumero()}`);
@@ -245,7 +246,97 @@ export default class CrudCliente extends Cadastro {
         });
     }
     
+    public atualizarCliente(): void {
+        console.log("\nAtualização de Cliente:");
+        console.log("---------------------------------");
     
+        this.listarClientes();
+    
+        let indiceCliente = this.entrada.receberNumero("Escolha o número do cliente que deseja editar:");
+        if (indiceCliente < 1 || indiceCliente > this.clientes.length) {
+            console.log("Índice de cliente inválido.");
+            return;
+        }
+        let cliente = this.clientes[indiceCliente - 1];
+    
+        console.log("Escolha a informação que deseja editar:");
+        console.log("1. Nome");
+        console.log("2. Nome Social");
+        console.log("3. Telefones");
+        console.log("4. Pets");
+        let opcao = this.entrada.receberNumero("Escolha a opção:");
+    
+        switch (opcao) {
+            case 1:
+                let novoNome = this.entrada.receberTexto("Digite o novo nome:");
+                cliente.setNome(novoNome);
+                console.log("Nome atualizado com sucesso!");
+                break;
+    
+            case 2:
+                let novoNomeSocial = this.entrada.receberTexto("Digite o novo nome social:");
+                cliente.setNomeSocial(novoNomeSocial);
+                console.log("Nome social atualizado com sucesso!");
+                break;
+    
+            case 3:
+                this.atualizarTelefones(cliente);
+                break;
+    
+            case 4:
+                this.atualizarPets(cliente);
+                break;
+    
+            default:
+                console.log("Opção inválida.");
+                break;
+        }
+    }
+    
+    private atualizarTelefones(cliente: Cliente): void {
+        console.log("\nAtualização de Telefones:");
+        console.log("---------------------------------");
+    
+        let qtdTelefones = this.entrada.receberNumero(`Por favor, a quantidade de números telefônicos: `);
+        let telefonesList: Array<Telefone> = [];
+        for (let i = 1; i <= qtdTelefones; i++) {
+            let ddd = this.entrada.receberTexto(`Por favor, informe o DDD do telefone ${i}: `);
+            let numero = this.entrada.receberTexto(`Por favor, insira o número do telefone ${i}: `);
+            let telefone = new Telefone(ddd, numero);
+            telefonesList.push(telefone);
+        }
+        cliente.setTelefones(telefonesList);
+        console.log("Telefones atualizados com sucesso!");
+    }
+    
+    private atualizarPets(cliente: Cliente): void {
+        console.log("\nAtualização de Pets:");
+        console.log("---------------------------------");
+    
+        let cadastrarMaisPet = this.entrada.receberTexto(`Deseja adicionar um novo pet para o cliente? Isso apagará os pets existentes (S/N): `);
+        cliente.limparPets();
+        while (cadastrarMaisPet.toUpperCase() === 'S') {
+            this.cadastrarPet(cliente);
+            cadastrarMaisPet = this.entrada.receberTexto(`Deseja adicionar mais um pet para o cliente? (S/N): `);
+        }
+        console.log("Pets atualizados com sucesso!");
+    }
+    
+    public excluirCliente(): void {
+        console.log("\nExclusão de Cliente:");
+        console.log("---------------------------------");
+    
+        this.listarClientes();
+        
+        let indiceCliente = this.entrada.receberNumero("Escolha o número do cliente que deseja excluir:");
+        if (indiceCliente < 1 || indiceCliente > this.clientes.length) {
+            console.log("Índice de cliente inválido.");
+            return;
+        }
+    
+        let clienteExcluido = this.clientes.splice(indiceCliente - 1, 1);
+        console.log(`Cliente ${clienteExcluido[0].nome} excluído com sucesso!`);
+    }
     
     
 

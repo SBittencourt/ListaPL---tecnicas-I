@@ -78,16 +78,16 @@ function OpcoesCliente() {
                 let listarClientes = new CrudCliente(empresa.getClientes, empresa.getProdutos, empresa.getServicos, empresa.getPets);
                 listarClientes.listarClientes();
                 break;
-                
-                
-
-
 
             case 3:
-
+                let AtualizarClientes = new CrudCliente(empresa.getClientes, empresa.getProdutos, empresa.getServicos, empresa.getPets);
+                AtualizarClientes.atualizarCliente();
+                break;
 
             case 4:
-
+                let excluirCliente = new CrudCliente(empresa.getClientes, empresa.getProdutos, empresa.getServicos, empresa.getPets);
+                excluirCliente.excluirCliente();
+                break;
    
 
             case 0:
