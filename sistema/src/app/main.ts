@@ -94,6 +94,11 @@ function OpcoesCliente() {
                 let excluirCliente = new CrudCliente(empresa.getClientes, empresa.getProdutos, empresa.getServicos, empresa.getPets);
                 excluirCliente.excluirCliente();
                 break;
+
+            case 6:
+                let ConsumoClientes = new CrudCliente(empresa.getClientes, empresa.getProdutos, empresa.getServicos, empresa.getPets);
+                ConsumoClientes.ConsumoClientes();
+                break;
    
 
             case 0:

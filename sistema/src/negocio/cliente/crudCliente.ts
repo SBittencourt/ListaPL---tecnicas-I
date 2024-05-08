@@ -7,7 +7,7 @@ import Produto from "../../modelo/produto";
 import Servico from "../../modelo/servico";
 import RG from "../../modelo/rg";
 import Telefone from "../../modelo/telefone";
-import CrudPet from "../pet/crudPet";
+
 
 export default class CrudCliente extends Cadastro {
     private clientes: Array<Cliente>;
@@ -352,6 +352,26 @@ export default class CrudCliente extends Cadastro {
         }
     }
     
+    public ConsumoClientes(): void {
+        console.log("\nRelatório de Consumo dos Clientes:");
+        console.log("---------------------------------");
+    
+        if (this.clientes.length === 0) {
+            console.log("Não existem clientes cadastrados.");
+            return;
+        }
+    
+        this.clientes.forEach((cliente, index) => {
+            console.log(`Cliente ${index + 1}:`);
+            if (cliente.nomeSocial) {
+                console.log(`Nome: ${cliente.nomeSocial}`);
+            } else {
+                console.log(`Nome: ${cliente.nome}`);
+            }
+            console.log(`Total Gasto: R$ ${cliente.calcularTotalGasto().toFixed(2)}`);
+            console.log("---------------------------------");
+        });
+    }
     
 
 }
