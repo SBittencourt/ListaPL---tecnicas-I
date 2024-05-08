@@ -255,9 +255,10 @@ function OpcoesListagem() {
 
     while (funcionando) {
         console.log(`Selecione:`);
-        console.log(`1 - Top 10 clientes que mais consumiram`);
-        console.log(`2 - Produtos e serviços mais vendidos`);
-        console.log(`3 - Mais vendidos por raça e tipo de pet`);
+        console.log(`1 - Top 10 clientes que mais consumiram em quantidade`);
+        console.log(`2 - Top 5 clientes que mais consumiram em valor`);
+        console.log(`3 - Produtos e serviços mais vendidos`);
+        console.log(`4 - Mais vendidos por raça e tipo de pet`);
         console.log(`0 - Sair`);
     
         let entrada = new Entrada()
@@ -265,13 +266,25 @@ function OpcoesListagem() {
 
         switch (opcao) {
             case 1:
-
+                let listarTop10ClientesPorQuantidade = new CrudCliente(empresa.getClientes, empresa.getProdutos, empresa.getServicos, empresa.getPets);
+                listarTop10ClientesPorQuantidade.listarTop10ClientesPorQuantidade();
+                break
 
             case 2:
-
+                let listarTop5ClientesPorValor = new CrudCliente(empresa.getClientes, empresa.getProdutos, empresa.getServicos, empresa.getPets);
+                listarTop5ClientesPorValor.listarTop5ClientesPorValor();
+                break
 
             case 3:
+                let listarServicosEProdutosMaisConsumidos = new CrudCliente(empresa.getClientes, empresa.getProdutos, empresa.getServicos, empresa.getPets);
+                listarServicosEProdutosMaisConsumidos.listarServicosEProdutosMaisConsumidos();
+                break
 
+            
+            case 4:
+                let listarServicosEProdutosPorTipoERacaDePets = new CrudCliente(empresa.getClientes, empresa.getProdutos, empresa.getServicos, empresa.getPets);
+                listarServicosEProdutosPorTipoERacaDePets.listarServicosEProdutosPorTipoERacaDePets();
+                break
    
 
             case 0:

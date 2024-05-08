@@ -382,8 +382,112 @@ export default class CrudCliente extends Cadastro {
             console.log("---------------------------------");
         });
     }
+
     
-    
+    /*Listagens pedidas -- colocando aqui para não confundir com outras abas*/
+
+
+    public listarTop10ClientesPorQuantidade(): void {
+        console.log("\nTop 10 Clientes que mais consumiram produtos ou serviços (em quantidade):");
+        console.log("---------------------------------");
     
 
+        const clientesOrdenados = this.clientes.sort((a, b) => {
+            const totalA = a.getProdutosConsumidos().length + a.getServicosConsumidos().length;
+            const totalB = b.getProdutosConsumidos().length + b.getServicosConsumidos().length;
+            return totalB - totalA;
+        });
+    
+        for (let i = 0; i < 10 && i < clientesOrdenados.length; i++) {
+            const cliente = clientesOrdenados[i];
+            console.log(`${i + 1}. ${cliente.nome} - Total de Consumo: ${cliente.getProdutosConsumidos().length + cliente.getServicosConsumidos().length}`);
+        }
+    }
+    
+    public listarTop5ClientesPorValor(): void {
+        console.log("\nTop 5 Clientes que mais consumiram em valor:");
+        console.log("---------------------------------");
+    
+        const clientesOrdenados = this.clientes.sort((a, b) => {
+            const totalA = a.calcularTotalGasto();
+            const totalB = b.calcularTotalGasto();
+            return totalB - totalA;
+        });
+    
+        for (let i = 0; i < 5 && i < clientesOrdenados.length; i++) {
+            const cliente = clientesOrdenados[i];
+            console.log(`${i + 1}. ${cliente.nome} - Total Gasto: R$ ${cliente.calcularTotalGasto().toFixed(2)}`);
+        }
+    }
+    
+    public listarServicosEProdutosMaisConsumidos(): void {
+        console.log("\nServiços e Produtos Mais Consumidos:");
+        console.log("---------------------------------");
+    
+        const produtosConsumidos: { [nome: string]: number } = {};
+        const servicosConsumidos: { [nome: string]: number } = {};
+
+        this.clientes.forEach(cliente => {
+            cliente.getProdutosConsumidos().forEach(produto => {
+                produtosConsumidos[produto.nome] = (produtosConsumidos[produto.nome] || 0) + 1;
+            });
+    
+            cliente.getServicosConsumidos().forEach(servico => {
+                servicosConsumidos[servico.nome] = (servicosConsumidos[servico.nome] || 0) + 1;
+            });
+        });
+    
+
+        const produtosOrdenados = Object.entries(produtosConsumidos).sort((a, b) => b[1] - a[1]);
+    
+        console.log("\nProdutos mais consumidos:");
+        produtosOrdenados.slice(0, 5).forEach(([nome, quantidade], index) => {
+            console.log(`${index + 1}. ${nome} - Quantidade: ${quantidade}`);
+        });
+    
+        const servicosOrdenados = Object.entries(servicosConsumidos).sort((a, b) => b[1] - a[1]);
+    
+        console.log("\nServiços mais consumidos:");
+        servicosOrdenados.slice(0, 5).forEach(([nome, quantidade], index) => {
+            console.log(`${index + 1}. ${nome} - Quantidade: ${quantidade}`);
+        });
+    }
+
+    public listarServicosEProdutosPorTipoERacaDePets(): void {
+        console.log("\nServiços e Produtos Mais Consumidos por Tipo e Raça de Pets:");
+        console.log("---------------------------------");
+    
+        const consumoPorTipoERaca: { [tipoRaca: string]: { servicos: { [nome: string]: number }, produtos: { [nome: string]: number } } } = {};
+    
+        this.clientes.forEach(cliente => {
+            cliente.getPets().forEach(pet => {
+                const tipoRaca = `${pet.getTipo()} - ${pet.getRaca()}`;
+                if (!consumoPorTipoERaca[tipoRaca]) {
+                    consumoPorTipoERaca[tipoRaca] = { servicos: {}, produtos: {} };
+                }
+    
+                cliente.getServicosConsumidos().forEach(servico => {
+                    consumoPorTipoERaca[tipoRaca].servicos[servico.nome] = (consumoPorTipoERaca[tipoRaca].servicos[servico.nome] || 0) + 1;
+                });
+    
+                cliente.getProdutosConsumidos().forEach(produto => {
+                    consumoPorTipoERaca[tipoRaca].produtos[produto.nome] = (consumoPorTipoERaca[tipoRaca].produtos[produto.nome] || 0) + 1;
+                });
+            });
+        });
+    
+        Object.entries(consumoPorTipoERaca).forEach(([tipoRaca, consumo]) => {
+            console.log(`\nTipo e Raça de Pet: ${tipoRaca}`);
+            console.log("Serviços mais consumidos:");
+            Object.entries(consumo.servicos).slice(0, 3).forEach(([nome, quantidade], index) => {
+                console.log(`${index + 1}. ${nome} - Quantidade: ${quantidade}`);
+            });
+            console.log("\nProdutos mais consumidos:");
+            Object.entries(consumo.produtos).slice(0, 3).forEach(([nome, quantidade], index) => {
+                console.log(`${index + 1}. ${nome} - Quantidade: ${quantidade}`);
+            });
+        });
+    }
+    
+    
 }
