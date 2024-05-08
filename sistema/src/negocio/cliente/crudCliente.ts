@@ -75,17 +75,7 @@ export default class CrudCliente extends Cadastro {
     
         this.associarProdutosConsumidos(cliente); 
         this.associarServicosConsumidos(cliente); 
-    
-        let escolherPet = this.entrada.receberTexto(`O cliente já possui um pet registrado no sistema? (S/N): `);
-        if (escolherPet.toUpperCase() === 'S') {
-            this.associarPetExistente(cliente);
-        } else {
-            let cadastrarPet = this.entrada.receberTexto(`Deseja cadastrar um novo pet para o cliente? (S/N): `);
-            if (cadastrarPet.toUpperCase() === 'S') {
-                const crudPet = new CrudPet(this.petsCadastrados);
-                crudPet.cadastrar();
-            }
-        }
+
         
         let cadastrarMais = this.entrada.receberTexto(`Deseja cadastrar mais um cliente? (S/N): `);
         if (cadastrarMais.toUpperCase() === 'S') {
@@ -152,6 +142,7 @@ export default class CrudCliente extends Cadastro {
             console.log(`Pet associado ao cliente com sucesso!`);
         }
     }
+      
 
     private listarProdutosDisponiveis(): void {
         console.log(`\nProdutos disponíveis:`);
@@ -236,7 +227,11 @@ export default class CrudCliente extends Cadastro {
     
         this.clientes.forEach((cliente, index) => {
             console.log(`Cliente ${index + 1}:`);
-            console.log(`Nome: ${cliente.nome}`);
+            if (cliente.nomeSocial) {
+                console.log(`Nome: ${cliente.nomeSocial}`);
+            } else {
+                console.log(`Nome: ${cliente.nome}`);
+            }
             console.log(`CPF: ${cliente.getCpf().getValor}`);
             console.log(`Telefones:`);
             cliente.getTelefones().forEach((telefone, i) => {
@@ -259,6 +254,7 @@ export default class CrudCliente extends Cadastro {
             console.log("---------------------------------");
         });
     }
+    
     
     
     public atualizarCliente(): void {
@@ -331,14 +327,12 @@ export default class CrudCliente extends Cadastro {
         console.log("\nAtualização de Pets:");
         console.log("---------------------------------");
     
-        let cadastrarMaisPet = this.entrada.receberTexto(`Deseja adicionar um novo pet para o cliente? Isso apagará os pets existentes (S/N): `);
-        cliente.limparPets();
-        while (cadastrarMaisPet.toUpperCase() === 'S') {
-            this.cadastrarPet(cliente);
-            cadastrarMaisPet = this.entrada.receberTexto(`Deseja adicionar mais um pet para o cliente? (S/N): `);
-        }
+        this.associarPetExistente(cliente);
+    
         console.log("Pets atualizados com sucesso!");
     }
+    
+    
     
     public excluirCliente(): void {
         console.log("\nExclusão de Cliente:");

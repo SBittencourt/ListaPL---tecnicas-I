@@ -60,7 +60,7 @@ function OpcoesCliente() {
         console.log(`Selecione:`);
         console.log(`1 - Cadastrar cliente`);
         console.log(`2 - Listar clientes`);
-        console.log(`3 - Atualizar cliente`);
+        console.log(`3 - Atualizar cliente & adicionar pet`);
         console.log(`4 - Deletar cliente`);
         console.log(`5 - Consumo por cliente`);
         console.log(`0 - Sair`);
