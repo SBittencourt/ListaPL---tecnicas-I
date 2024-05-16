@@ -1,51 +1,86 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
 
-type props = {
+type Props = {
     tema: string,
     botoes: string[],
     seletorView: Function
 }
 
-export default class BarraNavegacao extends Component<props>{
-    constructor(props: props | Readonly<props>) {
-        super(props)
-        this.gerarListaBotoes = this.gerarListaBotoes.bind(this)
+type State = {
+    menuAberto: boolean
+}
+
+export default class BarraNavegacao extends Component<Props, State> {
+    constructor(props: Props | Readonly<Props>) {
+        super(props);
+        this.state = {
+            menuAberto: false
+        };
+        this.gerarListaBotoes = this.gerarListaBotoes.bind(this);
+        this.toggleMenu = this.toggleMenu.bind(this);
     }
 
+    toggleMenu() {
+        this.setState({ menuAberto: !this.state.menuAberto });
+    }
 
     gerarListaBotoes() {
         if (this.props.botoes.length <= 0) {
-            return <></>
+            return <></>;
         } else {
-            let lista = this.props.botoes.map(valor =>
+            let lista = this.props.botoes.map((valor) => (
                 <li key={valor} className="nav-item">
-                    <a className="nav-link" href="#" onClick={(e) => this.props.seletorView(valor, e)}>{valor}</a>
+                    <a
+                        className="nav-link"
+                        href="#"
+                        onClick={(e) => {
+                            this.props.seletorView(valor, e);
+                            this.toggleMenu(); // Fechar o menu após clicar
+                        }}
+                    >
+                        {valor}
+                    </a>
                 </li>
-            )
-            return lista
+            ));
+            return lista;
         }
     }
 
     render() {
-        let tema = this.props.tema
+        const { tema } = this.props;
         return (
             <>
-                <nav className="navbar navbar-expand-lg" data-bs-theme="light" style={{ backgroundColor: tema, marginBottom: 10 }}>
+                <nav
+                    className="navbar navbar-expand-lg"
+                    data-bs-theme="light"
+                    style={{ backgroundColor: tema, marginBottom: 10 }}
+                >
                     <div className="container-fluid">
                         <span className="navbar-brand mb-0 h1">PetLovers</span>
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <button
+                            className="navbar-toggler"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarNav"
+                            aria-controls="navbarNav"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                            onClick={this.toggleMenu} // Toggle do menu ao clicar no botão de toggle
+                        >
                             <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div className="collapse navbar-collapse" id="navbarNav">
-                            <ul className="navbar-nav">
+                        <div
+                            className={`collapse navbar-collapse ${this.state.menuAberto ? "show" : ""}`}
+                            id="navbarNav"
+                        >
+                            <ul className="navbar-nav" onClick={this.toggleMenu}>
                                 {this.gerarListaBotoes()}
                             </ul>
                         </div>
                     </div>
                 </nav>
             </>
-        )
+        );
     }
 }
