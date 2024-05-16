@@ -16,7 +16,7 @@ export default class Roteador extends Component<{}, State> {
     constructor(props: {} | Readonly<{}>) {
         super(props);
         this.state = {
-            tela: 'Clientes'
+            tela: 'Home'
         };
         this.selecionarView = this.selecionarView.bind(this);
     }
@@ -31,7 +31,7 @@ export default class Roteador extends Component<{}, State> {
 
     render() {
         let barraNavegacao = (
-            <BarraNavegacao seletorView={this.selecionarView} tema="#e3f2fd" botoes={['Home','Cadastro', 'Cadastro Pet', 'Clientes', 'Pets', 'Produtos', 'Serviços']} />
+            <BarraNavegacao seletorView={this.selecionarView} tema="#e3f2fd" botoes={['Home', 'Clientes', 'Pets', 'Produtos', 'Serviços']} />
         );
         if (this.state.tela === 'Home') {
             return (
@@ -45,7 +45,7 @@ export default class Roteador extends Component<{}, State> {
             return (
                 <>
                     {barraNavegacao}
-                    <ListaCliente tema="#e3f2fd" />
+                    <ListaCliente tema="#e3f2fd" seletorView={this.selecionarView} />
                 </>
             );
         
@@ -53,9 +53,9 @@ export default class Roteador extends Component<{}, State> {
             return (
                 <>
                     {barraNavegacao}
-                    <ListaPet tema="#e3f2fd" />
+                    <ListaPet tema="#e3f2fd" seletorView={this.selecionarView} /> {/* Adicione a propriedade seletorView aqui */}
                 </>
-            );
+            );      
 
         } else if (this.state.tela === 'Cadastro') {
             return (
@@ -87,8 +87,6 @@ export default class Roteador extends Component<{}, State> {
                     <ListaServicos tema="#e3f2fd" />
                 </>
             );
-
-
 
         } else {
             return null; 
