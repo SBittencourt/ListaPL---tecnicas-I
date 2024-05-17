@@ -145,7 +145,9 @@ export default class ListaCliente extends Component<Props, State> {
 
         return (
             <div className="container-fluid">
-                <Link to="/clientes" className="btn btn-primary mb-3">Cadastrar novo cliente</Link>
+                <div className="d-flex justify-content-start mb-3">
+                    <Link to="/cadastro" className="btn btn-primary">Cadastrar novo cliente</Link>
+                </div>
                 <div className="list-group">
                     {clientes.map((cliente, index) => (
                         <div key={index}>

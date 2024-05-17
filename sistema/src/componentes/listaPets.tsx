@@ -144,8 +144,8 @@ export default class ListaPet extends Component<Props, State> {
         
         return (
             <div className="container-fluid">
-                <div className="d-flex justify-content-end mb-3">
-                    <Link to="/cadastro-pet" className="btn btn-primary">Cadastrar novo Pet</Link>
+                <div className="d-flex justify-content-start mb-3">
+                    <Link to="/cadastro-pet" className="btn btn-primary">Cadastrar novo pet</Link>
                 </div>
                 <div className="list-group">
                     {clientes.map((cliente, clienteIndex) => (
