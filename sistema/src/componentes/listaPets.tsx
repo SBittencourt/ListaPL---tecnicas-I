@@ -22,6 +22,7 @@ type Props = {
 }
 
 type State = {
+    clienteSelecionadoIndex: number | null;
     petSelecionadoIndex: number | null;
 }
 
@@ -29,14 +30,15 @@ export default class ListaPet extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
+            clienteSelecionadoIndex: null,
             petSelecionadoIndex: null
         };
     }
 
     handleClick(clienteIndex: number, petIndex: number) {
         const { petSelecionadoIndex } = this.state;
-        if (petSelecionadoIndex === null || petSelecionadoIndex !== clienteIndex) {
-            this.setState({ petSelecionadoIndex: clienteIndex });
+        if (petSelecionadoIndex === null || petSelecionadoIndex !== petIndex) {
+            this.setState({ clienteSelecionadoIndex: clienteIndex, petSelecionadoIndex: petIndex });
         } else {
             this.setState({ petSelecionadoIndex: null });
         }
@@ -44,7 +46,7 @@ export default class ListaPet extends Component<Props, State> {
 
     render() {
         const { tema } = this.props;
-        const { petSelecionadoIndex } = this.state;
+        const { clienteSelecionadoIndex, petSelecionadoIndex } = this.state;
         const clientes: Cliente[] = [
             { 
                 nome: "João Silva", 
@@ -159,7 +161,7 @@ export default class ListaPet extends Component<Props, State> {
                                 >
                                     {pet.nome}
                                 </a>
-                                {petSelecionadoIndex === clienteIndex && (
+                                {clienteSelecionadoIndex === clienteIndex && petSelecionadoIndex === petIndex && (
                                     <div className="card mt-3">
                                         <div className="card-body">
                                             <h5 className="card-title">{pet.nome}</h5>
