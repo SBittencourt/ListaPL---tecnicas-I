@@ -44,6 +44,16 @@ export default class ListaCliente extends Component<Props, State> {
         this.props.seletorView('Cadastro', new Event('click'));
     }
 
+    handleExcluirCliente(index: number) {
+        // Implemente a lógica para excluir o cliente aqui
+        console.log(`Excluir cliente ${index}`);
+    }
+
+    handleAtualizarCliente(index: number) {
+        // Implemente a lógica para atualizar o cliente aqui
+        console.log(`Atualizar cliente ${index}`);
+    }
+
     render() {
         const { tema } = this.props;
         const clientes: Cliente[] = [
@@ -171,6 +181,10 @@ export default class ListaCliente extends Component<Props, State> {
                                                 <li key={petIndex} className="list-group-item">{pet.nome} - Raça: {pet.raca}, Tipo: {pet.tipo}</li>
                                             ))}
                                         </ul>
+                                        <div className="mt-3">
+                                            <button className="btn btn-danger btn-sm ml-2" onClick={() => this.handleExcluirCliente(index)}>Excluir</button>
+                                            <button className="btn btn-primary btn-sm ml-2" onClick={() => this.handleAtualizarCliente(index)}>Atualizar</button>
+                                        </div>
                                     </div>
                                 </div>
                             )}

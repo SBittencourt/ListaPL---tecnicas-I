@@ -44,6 +44,16 @@ export default class ListaPet extends Component<Props, State> {
         }
     }
 
+    handleExcluirPet(clienteIndex: number, petIndex: number) {
+        // Implemente a lógica para excluir o pet aqui
+        console.log(`Excluir pet ${petIndex} do cliente ${clienteIndex}`);
+    }
+
+    handleAtualizarPet(clienteIndex: number, petIndex: number) {
+        // Implemente a lógica para atualizar o pet aqui
+        console.log(`Atualizar pet ${petIndex} do cliente ${clienteIndex}`);
+    }
+
     render() {
         const { tema } = this.props;
         const { clienteSelecionadoIndex, petSelecionadoIndex } = this.state;
@@ -160,19 +170,23 @@ export default class ListaPet extends Component<Props, State> {
                                     style={{ cursor: "pointer", background: tema }}
                                 >
                                     {pet.nome}
-                                </a>
-                                {clienteSelecionadoIndex === clienteIndex && petSelecionadoIndex === petIndex && (
-                                    <div className="card mt-3">
-                                        <div className="card-body">
-                                            <h5 className="card-title">{pet.nome}</h5>
-                                            <p className="card-text">Raça: {pet.raca}</p>
-                                            <p className="card-text">Tipo: {pet.tipo}</p>
-                                            <p className="card-text">Gênero: {pet.genero}</p>
-                                            <p className="card-text">Dono: {cliente.nome}</p>
-                                            <p className="card-text">Telefone: {cliente.telefone}</p>
+                                    {clienteSelecionadoIndex === clienteIndex && petSelecionadoIndex === petIndex && (
+                                        <div className="card mt-3">
+                                            <div className="card-body">
+                                                <h5 className="card-title">{pet.nome}</h5>
+                                                <p className="card-text">Raça: {pet.raca}</p>
+                                                <p className="card-text">Tipo: {pet.tipo}</p>
+                                                <p className="card-text">Gênero: {pet.genero}</p>
+                                                <p className="card-text">Dono: {cliente.nome}</p>
+                                                <p className="card-text">Telefone: {cliente.telefone}</p>
+                                                <div className="mt-3">
+                                                    <button className="btn btn-danger btn-sm ml-2" onClick={() => this.handleExcluirPet(clienteIndex, petIndex)}>Excluir</button>
+                                                    <button className="btn btn-primary btn-sm ml-2" onClick={() => this.handleAtualizarPet(clienteIndex, petIndex)}>Atualizar</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
+                                    )}
+                                </a>
                             </div>
                         ))
                     ))}
