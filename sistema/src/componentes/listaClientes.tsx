@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 type Pet = {
     nome: string;
@@ -16,7 +17,7 @@ type Cliente = {
 
 type Props = {
     tema: string;
-    seletorView: (novaTela: string, evento: Event) => void; 
+    seletorView: (novaTela: string, evento: Event) => void;
 }
 
 type State = {
@@ -144,7 +145,7 @@ export default class ListaCliente extends Component<Props, State> {
 
         return (
             <div className="container-fluid">
-               
+                <Link to="/clientes" className="btn btn-primary mb-3">Cadastrar novo cliente</Link>
                 <div className="list-group">
                     {clientes.map((cliente, index) => (
                         <div key={index}>

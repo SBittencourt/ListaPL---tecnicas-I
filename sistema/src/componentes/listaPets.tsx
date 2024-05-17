@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 type Pet = {
     nome: string;
@@ -17,7 +18,7 @@ type Cliente = {
 
 type Props = {
     tema: string;
-    seletorView: (novaTela: string, evento: Event) => void; // Adicione o tipo da prop para selecionar a visualização
+    seletorView: (novaTela: string, evento: Event) => void;
 }
 
 type State = {
@@ -138,11 +139,14 @@ export default class ListaPet extends Component<Props, State> {
                 pets: [
                     { nome: "Molly", raca: "Bulldog Francês", tipo: "Cachorro", genero: "Feminino" }
                 ] 
-            },
+            }
         ];
         
         return (
             <div className="container-fluid">
+                <div className="d-flex justify-content-end mb-3">
+                    <Link to="/cadastro-pet" className="btn btn-primary">Cadastrar novo Pet</Link>
+                </div>
                 <div className="list-group">
                     {clientes.map((cliente, clienteIndex) => (
                         cliente.pets.map((pet, petIndex) => (
