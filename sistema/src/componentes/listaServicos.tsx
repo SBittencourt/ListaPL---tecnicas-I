@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 type Servico = {
     nome: string;
@@ -62,6 +63,9 @@ export default class ListaServicos extends Component<Props, State> {
 
         return (
             <div className="container-fluid">
+                <div className="d-flex justify-content-start mb-3">
+                    <Link to="/cadastro-servicos" className="btn btn-primary">Cadastrar novo serviço</Link>
+                </div>
                 <div className="list-group">
                     {servicos.map((servico, index) => (
                         <div key={index}>

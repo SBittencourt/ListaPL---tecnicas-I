@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 type Produto = {
     nome: string;
@@ -62,6 +63,9 @@ export default class ListaProdutos extends Component<Props, State> {
 
         return (
             <div className="container-fluid">
+                <div className="d-flex justify-content-start mb-3">
+                    <Link to="/cadastro-produtos" className="btn btn-primary">Cadastrar novo produto</Link>
+                </div>
                 <div className="list-group">
                     {produtos.map((produto, index) => (
                         <div key={index}>
