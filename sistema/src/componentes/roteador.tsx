@@ -12,7 +12,7 @@ import Home from "./Home";
 const Roteador: React.FC = () => {
   return (
     <Router>
-      <BarraNavegacao tema="#e3f2fd" botoes={['Home', 'Clientes', 'Pets', 'Produtos', 'Serviços']} seletorView={(novaTela: string, evento: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {}} />
+      <BarraNavegacao tema="#e3f2fd" botoes={['Home', 'Clientes', 'Pets', 'Produtos', 'Servicos']} seletorView={(novaTela: string, evento: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {}} />
       <Routes>
         <Route path="/" element={<Home tema={""} />} />
         <Route path="/clientes" element={<ListaCliente tema={""} seletorView={function (novaTela: string, evento: Event): void {
@@ -25,6 +25,7 @@ const Roteador: React.FC = () => {
         <Route path="/cadastro-pet" element={<FormularioCadastroPet />} />
         <Route path="/produtos" element={<ListaProdutos tema={""} />} />
         <Route path="/servicos" element={<ListaServicos tema={""} />} />
+
       </Routes>
     </Router>
   );
