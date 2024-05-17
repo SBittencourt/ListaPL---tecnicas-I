@@ -144,10 +144,7 @@ export default class ListaCliente extends Component<Props, State> {
 
         return (
             <div className="container-fluid">
-                <button className="btn btn-primary mt-3" onClick={() => this.handleCadastroCliente()}>
-                    Cadastrar Novo Cliente
-                </button>
-                
+               
                 <div className="list-group">
                     {clientes.map((cliente, index) => (
                         <div key={index}>
@@ -155,7 +152,6 @@ export default class ListaCliente extends Component<Props, State> {
                                 href="#"
                                 className="list-group-item list-group-item-action"
                                 onClick={() => this.handleClick(index)}
-                                style={{ cursor: "pointer", background: tema }}
                             >
                                 {cliente.nome}
                             </a>

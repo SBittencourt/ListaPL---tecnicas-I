@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 type Props = {
     tema: string,
     botoes: string[],
-    seletorView: Function
+    seletorView: (novaTela: string, evento: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
 }
 
 type State = {
@@ -12,12 +13,11 @@ type State = {
 }
 
 export default class BarraNavegacao extends Component<Props, State> {
-    constructor(props: Props | Readonly<Props>) {
+    constructor(props: Props) {
         super(props);
         this.state = {
             menuAberto: false
         };
-        this.gerarListaBotoes = this.gerarListaBotoes.bind(this);
         this.toggleMenu = this.toggleMenu.bind(this);
     }
 
@@ -25,30 +25,8 @@ export default class BarraNavegacao extends Component<Props, State> {
         this.setState({ menuAberto: !this.state.menuAberto });
     }
 
-    gerarListaBotoes() {
-        if (this.props.botoes.length <= 0) {
-            return <></>;
-        } else {
-            let lista = this.props.botoes.map((valor) => (
-                <li key={valor} className="nav-item">
-                    <a
-                        className="nav-link"
-                        href="#"
-                        onClick={(e) => {
-                            this.props.seletorView(valor, e);
-                            this.toggleMenu(); // Fechar o menu após clicar
-                        }}
-                    >
-                        {valor}
-                    </a>
-                </li>
-            ));
-            return lista;
-        }
-    }
-
     render() {
-        const { tema } = this.props;
+        const { tema, botoes, seletorView } = this.props;
         return (
             <>
                 <nav
@@ -66,7 +44,7 @@ export default class BarraNavegacao extends Component<Props, State> {
                             aria-controls="navbarNav"
                             aria-expanded="false"
                             aria-label="Toggle navigation"
-                            onClick={this.toggleMenu} // Toggle do menu ao clicar no botão de toggle
+                            onClick={this.toggleMenu}
                         >
                             <span className="navbar-toggler-icon"></span>
                         </button>
@@ -74,8 +52,21 @@ export default class BarraNavegacao extends Component<Props, State> {
                             className={`collapse navbar-collapse ${this.state.menuAberto ? "show" : ""}`}
                             id="navbarNav"
                         >
-                            <ul className="navbar-nav" onClick={this.toggleMenu}>
-                                {this.gerarListaBotoes()}
+                            <ul className="navbar-nav">
+                                {botoes.map((valor) => (
+                                    <li key={valor} className="nav-item">
+                                        <Link
+                                            to={valor === 'Home' ? '/' : `/${valor.toLowerCase()}`}
+                                            className="nav-link"
+                                            onClick={(e) => {
+                                                seletorView(valor, e);
+                                                this.toggleMenu();
+                                            }}
+                                        >
+                                            {valor}
+                                        </Link>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>
@@ -84,3 +75,4 @@ export default class BarraNavegacao extends Component<Props, State> {
         );
     }
 }
+

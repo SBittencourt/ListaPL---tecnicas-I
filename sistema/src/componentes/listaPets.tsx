@@ -41,10 +41,6 @@ export default class ListaPet extends Component<Props, State> {
         }
     }
 
-    handleCadastroPet() {
-        this.props.seletorView('CadastroPet', new Event('click')); // Chame a função para abrir o formulário de cadastro de pet
-    }
-
     render() {
         const { tema } = this.props;
         const { petSelecionadoIndex } = this.state;
@@ -147,14 +143,6 @@ export default class ListaPet extends Component<Props, State> {
         
         return (
             <div className="container-fluid">
-                <div className="d-flex justify-content-end mb-3">
-                    <button
-                        className="btn btn-primary"
-                        onClick={() => this.handleCadastroPet()}
-                    >
-                        Cadastrar Novo Pet
-                    </button>
-                </div>
                 <div className="list-group">
                     {clientes.map((cliente, clienteIndex) => (
                         cliente.pets.map((pet, petIndex) => (
