@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 type Pet = {
     nome: string;
@@ -17,9 +18,11 @@ type Cliente = {
 
 type Props = {
     tema: string;
+    seletorView: (novaTela: string, evento: Event) => void;
 }
 
 type State = {
+    clienteSelecionadoIndex: number | null;
     petSelecionadoIndex: number | null;
 }
 
@@ -27,22 +30,33 @@ export default class ListaPet extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
+            clienteSelecionadoIndex: null,
             petSelecionadoIndex: null
         };
     }
 
     handleClick(clienteIndex: number, petIndex: number) {
         const { petSelecionadoIndex } = this.state;
-        if (petSelecionadoIndex === null || petSelecionadoIndex !== clienteIndex) {
-            this.setState({ petSelecionadoIndex: clienteIndex });
+        if (petSelecionadoIndex === null || petSelecionadoIndex !== petIndex) {
+            this.setState({ clienteSelecionadoIndex: clienteIndex, petSelecionadoIndex: petIndex });
         } else {
             this.setState({ petSelecionadoIndex: null });
         }
     }
 
+    handleExcluirPet(clienteIndex: number, petIndex: number) {
+        
+        console.log(`Excluir pet ${petIndex} do cliente ${clienteIndex}`);
+    }
+
+    handleAtualizarPet(clienteIndex: number, petIndex: number) {
+        
+        console.log(`Atualizar pet ${petIndex} do cliente ${clienteIndex}`);
+    }
+
     render() {
         const { tema } = this.props;
-        const { petSelecionadoIndex } = this.state;
+        const { clienteSelecionadoIndex, petSelecionadoIndex } = this.state;
         const clientes: Cliente[] = [
             { 
                 nome: "João Silva", 
@@ -137,12 +151,14 @@ export default class ListaPet extends Component<Props, State> {
                 pets: [
                     { nome: "Molly", raca: "Bulldog Francês", tipo: "Cachorro", genero: "Feminino" }
                 ] 
-            },
+            }
         ];
         
-
         return (
             <div className="container-fluid">
+                <div className="d-flex justify-content-start mb-3">
+                    <Link to="/cadastro-pet" className="btn btn-primary">Cadastrar novo pet</Link>
+                </div>
                 <div className="list-group">
                     {clientes.map((cliente, clienteIndex) => (
                         cliente.pets.map((pet, petIndex) => (
@@ -154,19 +170,23 @@ export default class ListaPet extends Component<Props, State> {
                                     style={{ cursor: "pointer", background: tema }}
                                 >
                                     {pet.nome}
-                                </a>
-                                {petSelecionadoIndex === clienteIndex && (
-                                    <div className="card mt-3">
-                                        <div className="card-body">
-                                            <h5 className="card-title">{pet.nome}</h5>
-                                            <p className="card-text">Raça: {pet.raca}</p>
-                                            <p className="card-text">Tipo: {pet.tipo}</p>
-                                            <p className="card-text">Gênero: {pet.genero}</p>
-                                            <p className="card-text">Dono: {cliente.nome}</p>
-                                            <p className="card-text">Telefone: {cliente.telefone}</p>
+                                    {clienteSelecionadoIndex === clienteIndex && petSelecionadoIndex === petIndex && (
+                                        <div className="card mt-3">
+                                            <div className="card-body">
+                                                <h5 className="card-title">{pet.nome}</h5>
+                                                <p className="card-text">Raça: {pet.raca}</p>
+                                                <p className="card-text">Tipo: {pet.tipo}</p>
+                                                <p className="card-text">Gênero: {pet.genero}</p>
+                                                <p className="card-text">Dono: {cliente.nome}</p>
+                                                <p className="card-text">Telefone: {cliente.telefone}</p>
+                                                <div className="mt-3">
+                                                    <button className="btn btn-danger btn-sm ml-2" onClick={() => this.handleExcluirPet(clienteIndex, petIndex)}>Excluir</button>
+                                                    <button className="btn btn-primary btn-sm ml-2" onClick={() => this.handleAtualizarPet(clienteIndex, petIndex)}>Atualizar</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
+                                    )}
+                                </a>
                             </div>
                         ))
                     ))}

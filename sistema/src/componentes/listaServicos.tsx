@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 type Servico = {
     nome: string;
@@ -28,6 +29,16 @@ export default class ListaServicos extends Component<Props, State> {
         } else {
             this.setState({ servicoSelecionadoIndex: index });
         }
+    }
+
+    handleExcluirServico(index: number) {
+        
+        console.log(`Excluir serviço ${index}`);
+    }
+
+    handleAtualizarServico(index: number) {
+        
+        console.log(`Atualizar serviço ${index}`);
     }
 
     render() {
@@ -62,6 +73,9 @@ export default class ListaServicos extends Component<Props, State> {
 
         return (
             <div className="container-fluid">
+                <div className="d-flex justify-content-start mb-3">
+                    <Link to="/cadastro-servicos" className="btn btn-primary">Cadastrar novo serviço</Link>
+                </div>
                 <div className="list-group">
                     {servicos.map((servico, index) => (
                         <div key={index}>
@@ -79,6 +93,12 @@ export default class ListaServicos extends Component<Props, State> {
                                         <h5 className="card-title">{servico.nome}</h5>
                                         <p className="card-text">Preço: R$ {servico.preco.toFixed(2)}</p>
                                         <p className="card-text">Descrição: {servico.descricao}</p>
+                                        <div className="d-flex justify-content-between">
+                                            <div>
+                                                <button className="btn btn-danger mr-2" onClick={() => this.handleExcluirServico(index)}>Excluir</button>
+                                                <button className="btn btn-primary" onClick={() => this.handleAtualizarServico(index)}>Atualizar</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             )}

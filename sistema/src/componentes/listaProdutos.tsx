@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 type Produto = {
     nome: string;
@@ -28,6 +29,16 @@ export default class ListaProdutos extends Component<Props, State> {
         } else {
             this.setState({ produtoSelecionadoIndex: index });
         }
+    }
+
+    handleExcluirProduto(index: number) {
+        
+        console.log(`Excluir produto ${index}`);
+    }
+
+    handleAtualizarProduto(index: number) {
+        
+        console.log(`Atualizar produto ${index}`);
     }
 
     render() {
@@ -62,6 +73,9 @@ export default class ListaProdutos extends Component<Props, State> {
 
         return (
             <div className="container-fluid">
+                <div className="d-flex justify-content-start mb-3">
+                    <Link to="/cadastro-produtos" className="btn btn-primary">Cadastrar novo produto</Link>
+                </div>
                 <div className="list-group">
                     {produtos.map((produto, index) => (
                         <div key={index}>
@@ -79,6 +93,10 @@ export default class ListaProdutos extends Component<Props, State> {
                                         <h5 className="card-title">{produto.nome}</h5>
                                         <p className="card-text">Valor: R$ {produto.valor.toFixed(2)}</p>
                                         <p className="card-text">Descrição: {produto.descricao}</p>
+                                        <div className="d-flex justify-content-start">
+                                            <button className="btn btn-danger mr-2" onClick={() => this.handleExcluirProduto(index)}>Excluir</button>
+                                            <button className="btn btn-primary" onClick={() => this.handleAtualizarProduto(index)}>Atualizar</button>
+                                        </div>
                                     </div>
                                 </div>
                             )}

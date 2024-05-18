@@ -1,88 +1,55 @@
-import React, { Component } from "react";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import BarraNavegacao from "./barraNavegacao";
-import ListaCliente from "./listaClientes";
+
 import FormularioCadastroCliente from "./formularioCadastroCliente";
 import FormularioCadastroPet from "./formularioCadastroPet";
+import FormularioCadastroProduto from "./formularioCadastroProduto";
+import FormularioCadastroServico from "./formularioCadastroServico";
+
+import ListaCliente from "./listaClientes"; 
 import ListaPet from "./listaPets";
 import ListaProdutos from "./listaProdutos";
 import ListaServicos from "./listaServicos";
+import Home from "./Home";
+import Login from "./login";
 
-type State = {
-    tela: string
-}
+const Roteador: React.FC = () => {
+  const location = useLocation();
 
-export default class Roteador extends Component<{}, State> {
-    constructor(props: {} | Readonly<{}>) {
-        super(props);
-        this.state = {
-            tela: 'Clientes'
-        };
-        this.selecionarView = this.selecionarView.bind(this);
-    }
+  return (
+    <>
+      {location.pathname !== "/" && (
+        <BarraNavegacao 
+          tema="#e3f2fd" 
+          botoes={['Home', 'Clientes', 'Pets', 'Produtos', 'Servicos']} 
+          seletorView={(novaTela: string, evento: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {}} 
+        />
+      )}
+      <Routes>
+        <Route path="/" element={<Login tema={""} />} />
+        <Route path="/home" element={<Home tema={""} />} />
+        <Route path="/clientes" element={<ListaCliente tema={""} seletorView={function (novaTela: string, evento: Event): void {
+                  throw new Error("Function not implemented.");
+              } } />} />
+        <Route path="/pets" element={<ListaPet tema={""} seletorView={function (novaTela: string, evento: Event): void {
+                  throw new Error("Function not implemented.");
+              } } />} />
+        <Route path="/produtos" element={<ListaProdutos tema={""} />} />
+        <Route path="/servicos" element={<ListaServicos tema={""} />} />
+        <Route path="/cadastro" element={<FormularioCadastroCliente />} />
+        <Route path="/cadastro-pet" element={<FormularioCadastroPet />} />
+        <Route path="/cadastro-produtos" element={<FormularioCadastroProduto />} />
+        <Route path="/cadastro-servicos" element={<FormularioCadastroServico />} />
+      </Routes>
+    </>
+  );
+};
 
-    selecionarView(novaTela: string, evento: Event) {
-        evento.preventDefault();
-        console.log(novaTela);
-        this.setState({
-            tela: novaTela
-        });
-    }
+const App: React.FC = () => (
+  <Router>
+    <Roteador />
+  </Router>
+);
 
-    render() {
-        let barraNavegacao = (
-            <BarraNavegacao seletorView={this.selecionarView} tema="#e3f2fd" botoes={['Cadastro', 'Cadastro Pet', 'Clientes', 'Pets', 'Produtos', 'Serviços']} />
-        );
-        if (this.state.tela === 'Clientes') {
-            return (
-                <>
-                    {barraNavegacao}
-                    <ListaCliente tema="#e3f2fd" />
-                </>
-            );
-        
-        } else if (this.state.tela === 'Pets') {
-            return (
-                <>
-                    {barraNavegacao}
-                    <ListaPet tema="#e3f2fd" />
-                </>
-            );
-
-        } else if (this.state.tela === 'Cadastro') {
-            return (
-                <>
-                    {barraNavegacao}
-                    <FormularioCadastroCliente tema="#e3f2fd" />
-                </>
-            );
-        } else if (this.state.tela === 'Cadastro Pet') {
-            return (
-                <>
-                    {barraNavegacao}
-                    <FormularioCadastroPet tema="#e3f2fd" />
-                </>
-            );
-
-        } else if (this.state.tela === 'Produtos') {
-            return (
-                <>
-                    {barraNavegacao}
-                    <ListaProdutos tema="#e3f2fd" />
-                </>
-            );
-
-        } else if (this.state.tela === 'Serviços') {
-            return (
-                <>
-                    {barraNavegacao}
-                    <ListaServicos tema="#e3f2fd" />
-                </>
-            );
-
-
-
-        } else {
-            return null; 
-        }
-    }
-}
+export default App;

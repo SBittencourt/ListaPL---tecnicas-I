@@ -1,13 +1,8 @@
 import React, { Component } from "react";
 
-type Props = {
-    tema: string
-}
-
-export default class FormularioCadastroCliente extends Component<Props> {
+export default class FormularioCadastroCliente extends Component{
 
     render() {
-        const { tema } = this.props;
         return (
             <div className="container-fluid">
                 <h1>Cadastrar cliente</h1>
@@ -29,7 +24,7 @@ export default class FormularioCadastroCliente extends Component<Props> {
                         <input type="text" className="form-control" placeholder="Telefone" aria-label="Telefone" aria-describedby="basic-addon1" />
                     </div>
                     <div className="input-group mb-3">
-                        <button className="btn btn-outline-secondary" type="button" style={{ background: tema }}>Cadastrar</button>
+                        <button className="btn btn-outline-secondary" type="button">Cadastrar</button>
                     </div>
                 </form>
             </div>
