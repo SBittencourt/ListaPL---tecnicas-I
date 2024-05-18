@@ -8,14 +8,14 @@ type Props = {
 const Home: React.FC<Props> = ({ tema }) => {
     return (
         <div className="container my-5">
-            <div className="text-center">
+            <div className="text-center mb-5">
                 <h1 className="mb-4">Bem-vindo à PetLovers!</h1>
                 <p className="mb-4">
                     Aqui você encontra tudo o que precisa para o cuidado e bem-estar do seu pet!
                 </p>
             </div>
-            <div className="row">
-                <div className="col-md-4 d-flex">
+            <div className="row justify-content-center">
+                <div className="col-md-4 d-flex mb-4">
                     <div className="card h-100 w-100">
                         <div className="card-body d-flex flex-column">
                             <h5 className="card-title">Banho e Tosa</h5>
@@ -26,7 +26,7 @@ const Home: React.FC<Props> = ({ tema }) => {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-4 d-flex">
+                <div className="col-md-4 d-flex mb-4">
                     <div className="card h-100 w-100">
                         <div className="card-body d-flex flex-column">
                             <h5 className="card-title">Cadastrar novo serviço</h5>
@@ -37,7 +37,7 @@ const Home: React.FC<Props> = ({ tema }) => {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-4 d-flex">
+                <div className="col-md-4 d-flex mb-4">
                     <div className="card h-100 w-100">
                         <div className="card-body d-flex flex-column">
                             <h5 className="card-title">Produtos</h5>
@@ -49,8 +49,8 @@ const Home: React.FC<Props> = ({ tema }) => {
                     </div>
                 </div>
             </div>
-            <div className="row mt-4">
-                <div className="col-md-4 d-flex">
+            <div className="row justify-content-center">
+                <div className="col-md-4 d-flex mb-4">
                     <div className="card h-100 w-100">
                         <div className="card-body d-flex flex-column">
                             <h5 className="card-title">Cadastrar Novo Produto</h5>
@@ -61,7 +61,7 @@ const Home: React.FC<Props> = ({ tema }) => {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-4 d-flex">
+                <div className="col-md-4 d-flex mb-4">
                     <div className="card h-100 w-100">
                         <div className="card-body d-flex flex-column">
                             <h5 className="card-title">Cadastrar Cliente</h5>
@@ -72,7 +72,7 @@ const Home: React.FC<Props> = ({ tema }) => {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-4 d-flex">
+                <div className="col-md-4 d-flex mb-4">
                     <div className="card h-100 w-100">
                         <div className="card-body d-flex flex-column">
                             <h5 className="card-title">Cadastrar Pet</h5>
@@ -84,7 +84,6 @@ const Home: React.FC<Props> = ({ tema }) => {
                     </div>
                 </div>
             </div>
-            <div className="mb-5"></div>
         </div>
     );
 };

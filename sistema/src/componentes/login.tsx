@@ -7,7 +7,7 @@ type Props = {
 const Login: React.FC<Props> = ({ tema }) => {
     const handleLogin = (event: React.FormEvent) => {
         event.preventDefault();
-        // lógica de login aqui, por exemplo, redirecionar ou autenticar
+        
         window.location.href = "/home";
     };
 
