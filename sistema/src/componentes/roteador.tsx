@@ -27,8 +27,8 @@ const Roteador: React.FC = () => {
         />
       )}
       <Routes>
-        <Route path="/" element={<Login tema={""} />} />
-        <Route path="/home" element={<Home tema={""} />} />
+        <Route path="/" element={<Login/>} />
+        <Route path="/home" element={<Home/>} />
         <Route path="/clientes" element={<ListaCliente tema={""} seletorView={function (novaTela: string, evento: Event): void {
                   throw new Error("Function not implemented.");
               } } />} />
