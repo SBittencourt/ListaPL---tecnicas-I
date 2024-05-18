@@ -31,6 +31,16 @@ export default class ListaServicos extends Component<Props, State> {
         }
     }
 
+    handleExcluirServico(index: number) {
+        
+        console.log(`Excluir serviço ${index}`);
+    }
+
+    handleAtualizarServico(index: number) {
+        
+        console.log(`Atualizar serviço ${index}`);
+    }
+
     render() {
         const { tema } = this.props;
         const servicos: Servico[] = [
@@ -83,6 +93,12 @@ export default class ListaServicos extends Component<Props, State> {
                                         <h5 className="card-title">{servico.nome}</h5>
                                         <p className="card-text">Preço: R$ {servico.preco.toFixed(2)}</p>
                                         <p className="card-text">Descrição: {servico.descricao}</p>
+                                        <div className="d-flex justify-content-between">
+                                            <div>
+                                                <button className="btn btn-danger mr-2" onClick={() => this.handleExcluirServico(index)}>Excluir</button>
+                                                <button className="btn btn-primary" onClick={() => this.handleAtualizarServico(index)}>Atualizar</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             )}

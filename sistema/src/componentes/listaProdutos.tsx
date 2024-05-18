@@ -31,6 +31,16 @@ export default class ListaProdutos extends Component<Props, State> {
         }
     }
 
+    handleExcluirProduto(index: number) {
+        
+        console.log(`Excluir produto ${index}`);
+    }
+
+    handleAtualizarProduto(index: number) {
+        
+        console.log(`Atualizar produto ${index}`);
+    }
+
     render() {
         const { tema } = this.props;
         const produtos: Produto[] = [
@@ -83,6 +93,10 @@ export default class ListaProdutos extends Component<Props, State> {
                                         <h5 className="card-title">{produto.nome}</h5>
                                         <p className="card-text">Valor: R$ {produto.valor.toFixed(2)}</p>
                                         <p className="card-text">Descrição: {produto.descricao}</p>
+                                        <div className="d-flex justify-content-start">
+                                            <button className="btn btn-danger mr-2" onClick={() => this.handleExcluirProduto(index)}>Excluir</button>
+                                            <button className="btn btn-primary" onClick={() => this.handleAtualizarProduto(index)}>Atualizar</button>
+                                        </div>
                                     </div>
                                 </div>
                             )}

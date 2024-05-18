@@ -45,12 +45,12 @@ export default class ListaPet extends Component<Props, State> {
     }
 
     handleExcluirPet(clienteIndex: number, petIndex: number) {
-        // Implemente a lógica para excluir o pet aqui
+        
         console.log(`Excluir pet ${petIndex} do cliente ${clienteIndex}`);
     }
 
     handleAtualizarPet(clienteIndex: number, petIndex: number) {
-        // Implemente a lógica para atualizar o pet aqui
+        
         console.log(`Atualizar pet ${petIndex} do cliente ${clienteIndex}`);
     }
 

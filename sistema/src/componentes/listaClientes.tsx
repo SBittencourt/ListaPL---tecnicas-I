@@ -45,12 +45,12 @@ export default class ListaCliente extends Component<Props, State> {
     }
 
     handleExcluirCliente(index: number) {
-        // Implemente a lógica para excluir o cliente aqui
+        
         console.log(`Excluir cliente ${index}`);
     }
 
     handleAtualizarCliente(index: number) {
-        // Implemente a lógica para atualizar o cliente aqui
+        
         console.log(`Atualizar cliente ${index}`);
     }
 

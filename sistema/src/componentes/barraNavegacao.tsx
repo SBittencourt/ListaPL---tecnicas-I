@@ -35,7 +35,9 @@ export default class BarraNavegacao extends Component<Props, State> {
                     style={{ backgroundColor: tema, marginBottom: 10 }}
                 >
                     <div className="container-fluid">
-                        <span className="navbar-brand mb-0 h1">PetLovers</span>
+                        <span className="navbar-brand mb-0 h1">
+                            <img src="../imagens/petlovers_logo.png" alt="PetLovers Logo" style={{ height: '60px' }} />
+                        </span>
                         <button
                             className="navbar-toggler"
                             type="button"
@@ -56,7 +58,7 @@ export default class BarraNavegacao extends Component<Props, State> {
                                 {botoes.map((valor) => (
                                     <li key={valor} className="nav-item">
                                         <Link
-                                            to={valor === 'Home' ? '/' : `/${valor.toLowerCase()}`}
+                                            to={valor === 'Home' ? '/home' : `/${valor.toLowerCase()}`}
                                             className="nav-link"
                                             onClick={(e) => {
                                                 seletorView(valor, e);
@@ -69,6 +71,11 @@ export default class BarraNavegacao extends Component<Props, State> {
                                 ))}
                             </ul>
                         </div>
+                        <div className="ml-auto">
+                            <Link to="/" className="navbar-brand">
+                                <img src="../imagens/logout.png" alt="Logout Icon" style={{ height: '30px' }} />
+                            </Link>
+                        </div> 
                     </div>
                 </nav>
             </>
