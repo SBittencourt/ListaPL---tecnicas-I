@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 type Props = {
     tema: string;
-}
+};
 
 const Home: React.FC<Props> = ({ tema }) => {
     return (
