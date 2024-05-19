@@ -22,7 +22,7 @@ Entre na pasta sistema e execute os seguintes comandos no terminal:
 
 ### `npx tsc`
 
-### `code .\out\app\main.js`
+### `node .\out\app\main.js`
 
 <hr>
 
