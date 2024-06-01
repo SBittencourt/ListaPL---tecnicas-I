@@ -1,5 +1,5 @@
 <h1 align="center">Listas técnica de programação I - PetLovers(PL) 🐶🐱</h1>
-<H5 align="center"> Status da Atv II: concluído(?)</H5>
+<H5 align="center"> Status da Atv II: concluído</H5>
 
 <hr> 
 
