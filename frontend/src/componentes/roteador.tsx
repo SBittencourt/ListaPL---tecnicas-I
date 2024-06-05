@@ -7,6 +7,7 @@ import ListaCliente from "./listaClientes";
 
 import Home from "./Home";
 import Login from "./login";
+import Atualizar from "./atualizarCliente";
 
 const Roteador: React.FC = () => {
   const location = useLocation();
@@ -16,7 +17,7 @@ const Roteador: React.FC = () => {
       {location.pathname !== "/" && (
         <BarraNavegacao 
           tema="#e3f2fd" 
-          botoes={['Home', 'Clientes', 'Pets', 'Produtos', 'Servicos']} 
+          botoes={['Home', 'Clientes', 'Cadastro']} 
           seletorView={(novaTela: string, evento: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {}} 
         />
       )}
@@ -26,6 +27,7 @@ const Roteador: React.FC = () => {
         <Route path="/clientes" element={<ListaCliente tema={""} seletorView={function (novaTela: string, evento: Event): void {
                   throw new Error("Function not implemented.");
               } } />} />
+        <Route path="/atualizar" element={<Atualizar tema={""} />} />
         <Route path="/cadastro" element={<FormularioCadastroCliente />} />
 
       </Routes>
