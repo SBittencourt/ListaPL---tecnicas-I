@@ -4,10 +4,11 @@ import BarraNavegacao from "./barraNavegacao";
 
 import FormularioCadastroCliente from "./formularioCadastroCliente";
 import ListaCliente from "./listaClientes"; 
-
 import Home from "./Home";
 import Login from "./login";
 import Atualizar from "./atualizarCliente";
+
+
 
 const Roteador: React.FC = () => {
   const location = useLocation();

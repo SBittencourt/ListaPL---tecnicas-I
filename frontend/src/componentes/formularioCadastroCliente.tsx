@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const FormularioCadastroCliente: React.FC = () => {
+    const estadosBrasileiros = [
+        "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", 
+        "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", 
+        "SP", "SE", "TO"
+    ];
+
     const [cliente, setCliente] = useState({
         nome: "",
         nomeSocial: "",
@@ -25,6 +31,17 @@ const FormularioCadastroCliente: React.FC = () => {
         setCliente({ ...cliente, [name]: value });
     };
 
+    const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setCliente({
+            ...cliente,
+            endereco: {
+                ...cliente.endereco,
+                [name]: value
+            }
+        });
+    };
+
     const handleEnderecoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setCliente({
@@ -34,6 +51,34 @@ const FormularioCadastroCliente: React.FC = () => {
                 [name]: value
             }
         });
+    };
+
+    const formatCPF = (value: string) => {
+        return value
+            .replace(/\D/g, '')
+            .slice(0, 11)
+            .replace(/^(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    };
+
+    const formatRG = (value: string) => {
+        return value
+            .replace(/\D/g, '')
+            .slice(0, 9)
+            .replace(/^(\d{2})(\d{3})(\d{3})(\d{1})$/, '$1.$2.$3-$4');
+    };
+
+    const formatTelefone = (value: string) => {
+        return value
+            .replace(/\D/g, '')
+            .slice(0, 11)
+            .replace(/^(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    };
+
+    const formatCEP = (value: string) => {
+        return value
+            .replace(/\D/g, '')
+            .slice(0, 9)
+            .replace(/^(\d{5})(\d{3})/, '$1-$2');
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -100,7 +145,7 @@ const FormularioCadastroCliente: React.FC = () => {
                         className="form-control"
                         placeholder="CPF *"
                         name="cpf"
-                        value={cliente.cpf}
+                        value={formatCPF(cliente.cpf)}
                         onChange={handleChange}
                         required
                     />
@@ -111,7 +156,7 @@ const FormularioCadastroCliente: React.FC = () => {
                         className="form-control"
                         placeholder="RG"
                         name="rg"
-                        value={cliente.rg}
+                        value={formatRG(cliente.rg)}
                         onChange={handleChange}
                     />
                 </div>
@@ -121,7 +166,7 @@ const FormularioCadastroCliente: React.FC = () => {
                         className="form-control"
                         placeholder="Telefone *"
                         name="telefone"
-                        value={cliente.telefone}
+                        value={formatTelefone(cliente.telefone)}
                         onChange={handleChange}
                         required
                     />
@@ -143,15 +188,19 @@ const FormularioCadastroCliente: React.FC = () => {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="input-group mb-3">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Estado *"
+                            <select
+                                className="form-select"
+                                aria-label="Estado"
                                 name="estado"
                                 value={cliente.endereco.estado}
-                                onChange={handleEnderecoChange}
+                                onChange={handleSelectChange}
                                 required
-                            />
+                            >
+                                <option value="">Selecione o estado *</option>
+                                {estadosBrasileiros.map((estado, index) => (
+                                    <option key={index} value={estado}>{estado}</option>
+                                ))}
+                            </select>
                         </div>
                         <div className="input-group mb-3">
                             <input
@@ -205,7 +254,7 @@ const FormularioCadastroCliente: React.FC = () => {
                                 className="form-control"
                                 placeholder="CEP *"
                                 name="codigoPostal"
-                                value={cliente.endereco.codigoPostal}
+                                value={formatCEP(cliente.endereco.codigoPostal)}
                                 onChange={handleEnderecoChange}
                                 required
                             />
