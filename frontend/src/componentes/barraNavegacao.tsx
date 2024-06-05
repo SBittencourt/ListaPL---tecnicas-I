@@ -22,9 +22,9 @@ const BarraNavegacao: React.FC<Props> = ({ tema, botoes, seletorView }) => {
             style={{ backgroundColor: tema, marginBottom: 10 }}
         >
             <div className="container-fluid">
-                <span className="navbar-brand mb-0 h1">
+                <Link to="/home" className="navbar-brand">
                     <img src="../imagens/petlovers_logo.png" alt="PetLovers Logo" style={{ height: '60px' }} />
-                </span>
+                </Link>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -66,4 +66,3 @@ const BarraNavegacao: React.FC<Props> = ({ tema, botoes, seletorView }) => {
 };
 
 export default BarraNavegacao;
-
