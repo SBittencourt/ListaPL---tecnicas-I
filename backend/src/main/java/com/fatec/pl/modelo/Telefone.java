@@ -13,12 +13,24 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Telefone extends RepresentationModel<Telefone> {
-	@Id
+public class Endereco extends RepresentationModel<Endereco> {
+	@Id()
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable = false)
+	
+	@Column
+	private String estado;
+	@Column
+	private String cidade;
+	@Column
+	private String bairro;
+	@Column
+	private String rua;
+	@Column
 	private String numero;
-	@Column(nullable = false)
-	private String ddd;
+	@Column
+	private String codigoPostal;
+	@Column
+	private String informacoesAdicionais;
+
 }
