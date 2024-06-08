@@ -16,7 +16,7 @@ Projeto desenvolvido para a aula de técnicas de programação I da FATEC-SJC, u
 
 ## Como executar
 
-Entre na pasta sistema e execute os seguintes comandos no terminal:
+Entre na pasta e execute os seguintes comandos no terminal:
 
 ### `cd sistema`
 
