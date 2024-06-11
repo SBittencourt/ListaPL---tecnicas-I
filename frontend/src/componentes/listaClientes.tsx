@@ -22,7 +22,7 @@ const ListaCliente: React.FC<Props> = ({ tema, seletorView }) => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get("http://localhost:8080/cliente/clientes");
+                const response = await axios.get("http://localhost:32831/cliente/clientes");
                 setClientes(response.data);
             } catch (error) {
                 console.error("Erro ao obter clientes:", error);

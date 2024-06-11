@@ -88,7 +88,7 @@ const FormularioCadastroCliente: React.FC = () => {
             return;
         }
         try {
-            await axios.post("http://localhost:8080/cliente/cadastrar", cliente);
+            await axios.post("http://localhost:32831/cliente/cadastrar", cliente);
             alert("Cliente cadastrado com sucesso!");
             setCliente({
                 nome: "",
