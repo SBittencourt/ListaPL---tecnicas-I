@@ -24,9 +24,9 @@ interface Cliente {
   nomeSocial: string;
   email: string | null;
   endereco: Endereco;
-  cpf?: string; // Pode estar ausente
-  rg?: string; // Pode estar ausente
-  telefones?: Telefone[]; // Pode estar ausente
+  cpf?: string; 
+  rg?: string; 
+  telefones?: Telefone[]; 
 }
 
 const ListaCliente = () => {
@@ -59,16 +59,33 @@ const ListaCliente = () => {
   };
 
   const handleCadastroCliente = () => {
-    // Lógica para lidar com o clique em "Cadastrar novo cliente"
   };
 
-  const handleExcluirCliente = (index: number) => {
-    // Lógica para lidar com o clique em "Excluir"
+  const handleExcluirCliente = async (id: number) => {
+    try {
+      const clienteExclusao = clientes.find(cliente => cliente.id === id);
+      if (!clienteExclusao) {
+        console.error('Cliente não encontrado');
+        return;
+      }
+  
+      await axios.delete('http://localhost:32831/cliente/excluir', {
+        data: clienteExclusao, // Envia o objeto Cliente no corpo da solicitação
+      });
+  
+      setClientes(clientes.filter(cliente => cliente.id !== id));
+    } catch (error) {
+      console.error('Erro ao excluir cliente:', error);
+      setError('Erro ao excluir cliente. Por favor, tente novamente mais tarde.');
+    }
   };
+  
+  
 
-  const handleAtualizarCliente = (index: number) => {
-    // Lógica para lidar com o clique em "Atualizar"
+  const handleAtualizarCliente = (id: number) => {
+    window.location.href = `http://localhost:3000/cliente/${id}`;
   };
+  
 
   return (
     <div className="container-fluid">
@@ -110,8 +127,8 @@ const ListaCliente = () => {
                     )}
                   </ul>
                   <div className="mt-3">
-                    <button className="btn btn-danger btn-sm ml-2" onClick={() => handleExcluirCliente(index)}>Excluir</button>
-                    <button className="btn btn-primary btn-sm ml-2" onClick={() => handleAtualizarCliente(index)}>Atualizar</button>
+                    <button className="btn btn-danger btn-sm ml-2" onClick={() => handleExcluirCliente(cliente.id)}>Excluir</button>
+                    <button className="btn btn-primary btn-sm ml-2" onClick={() => handleAtualizarCliente(cliente.id)}>Atualizar</button>
                   </div>
                 </div>
               </div>
