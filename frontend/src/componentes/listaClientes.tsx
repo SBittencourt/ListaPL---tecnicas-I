@@ -89,7 +89,7 @@ const ListaCliente = () => {
   
 
   const handleAtualizarCliente = (id: number) => {
-    window.location.href = `http://localhost:3000/cliente/${id}`;
+    window.location.href = `http://localhost:3000/atualizar/${id}`;
   };
   
 

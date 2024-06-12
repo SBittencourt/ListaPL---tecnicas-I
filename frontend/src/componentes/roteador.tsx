@@ -25,9 +25,8 @@ const Roteador: React.FC = () => {
         <Route path="/" element={<Login tema={""} />} />
         <Route path="/home" element={<Home tema={""} />} />
         <Route path="/clientes" element={<ListaCliente />} />
-        <Route path="/atualizar" element={<Atualizar />} />
         <Route path="/cadastro" element={<FormularioCadastroCliente />} />
-        <Route path="/cliente/:id" element={<FormularioAtualizarCliente />} />
+        <Route path="/atualizar/:id" element={<FormularioAtualizarCliente />} />
       </Routes>
     </>
   );
