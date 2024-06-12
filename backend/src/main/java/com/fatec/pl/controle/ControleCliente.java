@@ -19,7 +19,7 @@ import com.fatec.pl.hateoas.HateoasCliente;
 import com.fatec.pl.modelo.Cliente;
 import com.fatec.pl.repositorio.RepositorioCliente;
 
-@CrossOrigin
+@CrossOrigin("http://localhost:3000")
 @RestController
 public class ControleCliente {
 	@Autowired
@@ -49,7 +49,7 @@ public class ControleCliente {
 
 	@SuppressWarnings("deprecation")
 	@PutMapping("/cliente/atualizar/{id}")
-	public ResponseEntity<?> atualizarCliente(@RequestBody Cliente atualizacao) {
+	public ResponseEntity<?> atualizarCliente(@PathVariable("id") Long id, @RequestBody Cliente atualizacao) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		Cliente cliente = repositorio.getById(atualizacao.getId());
 		if (cliente != null) {

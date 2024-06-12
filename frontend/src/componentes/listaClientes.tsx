@@ -62,6 +62,11 @@ const ListaCliente = () => {
   };
 
   const handleExcluirCliente = async (id: number) => {
+    const confirmacao = window.confirm('Tem certeza que deseja excluir este cliente?');
+    if (!confirmacao) {
+      return; 
+    }
+  
     try {
       const clienteExclusao = clientes.find(cliente => cliente.id === id);
       if (!clienteExclusao) {
@@ -70,7 +75,7 @@ const ListaCliente = () => {
       }
   
       await axios.delete('http://localhost:32831/cliente/excluir', {
-        data: clienteExclusao, 
+        data: clienteExclusao,
       });
   
       setClientes(clientes.filter(cliente => cliente.id !== id));
@@ -79,6 +84,7 @@ const ListaCliente = () => {
       setError('Erro ao excluir cliente. Por favor, tente novamente mais tarde.');
     }
   };
+  
   
   
 

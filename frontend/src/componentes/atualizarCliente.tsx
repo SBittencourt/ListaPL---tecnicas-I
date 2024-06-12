@@ -68,13 +68,14 @@ const FormularioAtualizarCliente: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:32831/cliente/${id}`, cliente);
+            await axios.put(`http://localhost:32831/cliente/atualizar/`, cliente); 
             alert('Cliente atualizado com sucesso!');
         } catch (error) {
             alert('Ocorreu um erro ao atualizar o cliente. Por favor, tente novamente mais tarde.');
             console.error('Erro ao atualizar cliente:', error);
         }
     };
+    
 
     return (
         <div className="container">
