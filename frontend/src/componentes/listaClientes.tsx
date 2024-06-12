@@ -2,12 +2,31 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+interface Telefone {
+  ddd: string;
+  numero: string;
+}
+
+interface Endereco {
+  id: number;
+  estado: string;
+  cidade: string;
+  bairro: string;
+  rua: string;
+  numero: string;
+  codigoPostal: string;
+  informacoesAdicionais: string;
+}
+
 interface Cliente {
   id: number;
   nome: string;
-  cpf: string;
-  rg: string;
-  telefone: []; 
+  nomeSocial: string;
+  email: string | null;
+  endereco: Endereco;
+  cpf?: string; // Pode estar ausente
+  rg?: string; // Pode estar ausente
+  telefones?: Telefone[]; // Pode estar ausente
 }
 
 const ListaCliente = () => {
@@ -21,10 +40,13 @@ const ListaCliente = () => {
         const response = await axios.get<Cliente[]>('http://localhost:32831/cliente/clientes', {
           validateStatus: (status) => status >= 200 && status < 303, 
         });
-        if (response.status === 302) {
+        console.log('Response:', response);
+        console.log('Data:', response.data);
+        if (response.status === 200 || response.status === 302) {
           setClientes(response.data);
         } 
       } catch (error) {
+        console.error('Erro ao obter clientes:', error);
         setError('Erro ao obter clientes. Por favor, tente novamente mais tarde.');
       }
     };
@@ -37,15 +59,15 @@ const ListaCliente = () => {
   };
 
   const handleCadastroCliente = () => {
+    // Lógica para lidar com o clique em "Cadastrar novo cliente"
   };
 
   const handleExcluirCliente = (index: number) => {
-
+    // Lógica para lidar com o clique em "Excluir"
   };
 
   const handleAtualizarCliente = (index: number) => {
-
-    
+    // Lógica para lidar com o clique em "Atualizar"
   };
 
   return (
@@ -66,9 +88,27 @@ const ListaCliente = () => {
               <div className="card mt-3">
                 <div className="card-body">
                   <h5 className="card-title">{cliente.nome}</h5>
-                  <p className="card-text">CPF: {cliente.cpf}</p>
-                  <p className="card-text">RG: {cliente.rg}</p>
-                  <p className="card-text">Telefone: {cliente.telefone}</p>
+                  <p className="card-text">Nome Social: {cliente.nomeSocial}</p>
+                  <p className="card-text">Email: {cliente.email || 'Não disponível'}</p>
+                  <p className="card-text">Endereço:</p>
+                  <ul>
+                    <li>Estado: {cliente.endereco.estado}</li>
+                    <li>Cidade: {cliente.endereco.cidade}</li>
+                    <li>Bairro: {cliente.endereco.bairro}</li>
+                    <li>Rua: {cliente.endereco.rua}, {cliente.endereco.numero}</li>
+                    <li>CEP: {cliente.endereco.codigoPostal}</li>
+                    <li>Informações Adicionais: {cliente.endereco.informacoesAdicionais || 'Não disponível'}</li>
+                  </ul>
+                  <p className="card-text">Telefones:</p>
+                  <ul>
+                    {cliente.telefones && cliente.telefones.length > 0 ? (
+                      cliente.telefones.map((tel, telIndex) => (
+                        <li key={telIndex}>{`(${tel.ddd}) ${tel.numero}`}</li>
+                      ))
+                    ) : (
+                      <li>Não disponível</li>
+                    )}
+                  </ul>
                   <div className="mt-3">
                     <button className="btn btn-danger btn-sm ml-2" onClick={() => handleExcluirCliente(index)}>Excluir</button>
                     <button className="btn btn-primary btn-sm ml-2" onClick={() => handleAtualizarCliente(index)}>Atualizar</button>
