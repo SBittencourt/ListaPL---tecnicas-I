@@ -8,8 +8,6 @@ import Home from "./Home";
 import Login from "./login";
 import Atualizar from "./atualizarCliente";
 
-
-
 const Roteador: React.FC = () => {
   const location = useLocation();
 
@@ -25,12 +23,9 @@ const Roteador: React.FC = () => {
       <Routes>
         <Route path="/" element={<Login tema={""} />} />
         <Route path="/home" element={<Home tema={""} />} />
-        <Route path="/clientes" element={<ListaCliente tema={""} seletorView={function (novaTela: string, evento: Event): void {
-                  throw new Error("Function not implemented.");
-              } } />} />
-        <Route path="/atualizar" element={<Atualizar tema={""} />} />
+        <Route path="/clientes" element={<ListaCliente seletorView={(novaTela: string, evento: Event): void => { throw new Error("Function not implemented."); } } tema={""} />} />
+        <Route path="/atualizar" element={<Atualizar />} />
         <Route path="/cadastro" element={<FormularioCadastroCliente />} />
-
       </Routes>
     </>
   );

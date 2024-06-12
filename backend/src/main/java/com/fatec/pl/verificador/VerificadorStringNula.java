@@ -1,15 +1,12 @@
 package com.fatec.pl.verificador;
 
 import org.springframework.stereotype.Component;
+import com.fatec.pl.modelo.Endereco;
 
 @Component
-public class VerificadorStringNula implements Verificador<String> {
-	@Override
-	public boolean verificar(String objeto) {
-		boolean nulo = true;
-		if (!(objeto == null)) {
-			nulo = objeto.isBlank();
-		}
-		return nulo;
-	}
+public class VerificadorEnderecoNulo implements Verificador<Endereco> {
+    @Override
+    public boolean verificar(Endereco objeto) {
+        return objeto == null;
+    }
 }

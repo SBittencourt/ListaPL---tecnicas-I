@@ -13,8 +13,7 @@ const FormularioCadastroCliente: React.FC = () => {
         nomeSocial: "",
         cpf: "",
         rg: "",
-        telefone: "",
-        email: "", 
+        email: "",
         endereco: {
             estado: "",
             cidade: "",
@@ -23,7 +22,8 @@ const FormularioCadastroCliente: React.FC = () => {
             numero: "",
             codigoPostal: "",
             informacoesAdicionais: ""
-        }
+        },
+        telefones: [{ ddd: "", numero: "" }]
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,6 +51,18 @@ const FormularioCadastroCliente: React.FC = () => {
                 [name]: value
             }
         });
+    };
+
+    const handleTelefoneChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        const novosTelefones = cliente.telefones.map((telefone, i) =>
+            i === index ? { ...telefone, [name]: value } : telefone
+        );
+        setCliente({ ...cliente, telefones: novosTelefones });
+    };
+
+    const adicionarTelefone = () => {
+        setCliente({ ...cliente, telefones: [...cliente.telefones, { ddd: "", numero: "" }] });
     };
 
     const formatCPF = (value: string) => {
@@ -83,7 +95,7 @@ const FormularioCadastroCliente: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!cliente.nome || !cliente.cpf || !cliente.telefone || !cliente.email || !cliente.endereco.estado || !cliente.endereco.cidade || !cliente.endereco.bairro || !cliente.endereco.rua || !cliente.endereco.numero || !cliente.endereco.codigoPostal) {
+        if (!cliente.nome || !cliente.cpf || cliente.telefones.some(t => !t.ddd || !t.numero) || !cliente.email || !cliente.endereco.estado || !cliente.endereco.cidade || !cliente.endereco.bairro || !cliente.endereco.rua || !cliente.endereco.numero || !cliente.endereco.codigoPostal) {
             alert("Por favor, preencha todos os campos obrigatórios.");
             return;
         }
@@ -95,8 +107,7 @@ const FormularioCadastroCliente: React.FC = () => {
                 nomeSocial: "",
                 cpf: "",
                 rg: "",
-                telefone: "",
-                email: " ",
+                email: "",
                 endereco: {
                     estado: "",
                     cidade: "",
@@ -105,7 +116,8 @@ const FormularioCadastroCliente: React.FC = () => {
                     numero: "",
                     codigoPostal: "",
                     informacoesAdicionais: ""
-                }
+                },
+                telefones: [{ ddd: "", numero: "" }]
             });
         } catch (error) {
             alert("Ocorreu um erro ao cadastrar o cliente.");
@@ -162,17 +174,6 @@ const FormularioCadastroCliente: React.FC = () => {
                 </div>
                 <div className="input-group mb-3">
                     <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Telefone *"
-                        name="telefone"
-                        value={formatTelefone(cliente.telefone)}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="input-group mb-3">
-                    <input
                         type="email"
                         className="form-control"
                         placeholder="Email *"
@@ -181,6 +182,42 @@ const FormularioCadastroCliente: React.FC = () => {
                         onChange={handleChange}
                         required
                     />
+                </div>
+                <br></br>
+                <h5>Telefones:</h5>
+                <br></br>
+                {cliente.telefones.map((telefone, index) => (
+                    <div key={index} className="row">
+                        <div className="col-md-6">
+                            <div className="input-group mb-3">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="DDD *"
+                                    name="ddd"
+                                    value={telefone.ddd}
+                                    onChange={(e) => handleTelefoneChange(index, e)}
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="input-group mb-3">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Número *"
+                                    name="numero"
+                                    value={formatTelefone(telefone.numero)}
+                                    onChange={(e) => handleTelefoneChange(index, e)}
+                                    required
+                                />
+                            </div>
+                        </div>
+                    </div>
+                ))}
+                <div className="input-group mb-3">
+                    <button type="button" className="btn btn-outline-secondary" onClick={adicionarTelefone}>Adicionar Telefone</button>
                 </div>
                 <br></br>
                 <h5>Endereço:</h5>
