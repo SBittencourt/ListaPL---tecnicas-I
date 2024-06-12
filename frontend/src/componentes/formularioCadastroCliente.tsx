@@ -55,8 +55,9 @@ const FormularioCadastroCliente: React.FC = () => {
 
     const handleTelefoneChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
+        const formatValue = name === "numero" ? formatTelefone(value) : value;
         const novosTelefones = cliente.telefones.map((telefone, i) =>
-            i === index ? { ...telefone, [name]: value } : telefone
+            i === index ? { ...telefone, [name]: formatValue } : telefone
         );
         setCliente({ ...cliente, telefones: novosTelefones });
     };
@@ -208,7 +209,7 @@ const FormularioCadastroCliente: React.FC = () => {
                                     className="form-control"
                                     placeholder="Número *"
                                     name="numero"
-                                    value={formatTelefone(telefone.numero)}
+                                    value={telefone.numero}
                                     onChange={(e) => handleTelefoneChange(index, e)}
                                     required
                                 />
@@ -275,47 +276,49 @@ const FormularioCadastroCliente: React.FC = () => {
                             />
                         </div>
                         <div className="input-group mb-3">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Número *"
-                                name="numero"
-                                value={cliente.endereco.numero}
-                                onChange={handleEnderecoChange}
-                                required
-                            />
-                        </div>
-                        <div className="input-group mb-3">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="CEP *"
-                                name="codigoPostal"
-                                value={formatCEP(cliente.endereco.codigoPostal)}
-                                onChange={handleEnderecoChange}
-                                required
-                            />
-                        </div>
-                    </div>
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Número *"
+                        name="numero"
+                        value={cliente.endereco.numero}
+                        onChange={handleEnderecoChange}
+                        required
+                    />
                 </div>
                 <div className="input-group mb-3">
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Informações adicionais (bloco, apartamento, etc)"
-                        name="informacoesAdicionais"
-                        value={cliente.endereco.informacoesAdicionais}
+                        placeholder="CEP *"
+                        name="codigoPostal"
+                        value={formatCEP(cliente.endereco.codigoPostal)}
                         onChange={handleEnderecoChange}
+                        required
                     />
                 </div>
-
-                <br></br>
-                <div className="input-group mb-3">
-                    <button className="btn btn-outline-secondary" type="submit">Cadastrar</button>
-                </div>
-            </form>
+            </div>
         </div>
-    );
+        <div className="input-group mb-3">
+            <input
+                type="text"
+                className="form-control"
+                placeholder="Informações adicionais (bloco, apartamento, etc)"
+                name="informacoesAdicionais"
+                value={cliente.endereco.informacoesAdicionais}
+                onChange={handleEnderecoChange}
+            />
+        </div>
+
+        <br></br>
+        <div className="input-group mb-3">
+            <button className="btn btn-outline-secondary" type="submit">Cadastrar</button>
+        </div>
+    </form>
+</div>
+);
 };
 
 export default FormularioCadastroCliente;
+
+                        
