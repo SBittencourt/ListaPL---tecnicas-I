@@ -7,6 +7,7 @@ import ListaCliente from "./listaClientes";
 import Home from "./Home";
 import Login from "./login";
 import Atualizar from "./atualizarCliente";
+import FormularioAtualizarCliente from "./atualizarCliente";
 
 const Roteador: React.FC = () => {
   const location = useLocation();
@@ -26,6 +27,7 @@ const Roteador: React.FC = () => {
         <Route path="/clientes" element={<ListaCliente />} />
         <Route path="/atualizar" element={<Atualizar />} />
         <Route path="/cadastro" element={<FormularioCadastroCliente />} />
+        <Route path="/cliente/:id" element={<FormularioAtualizarCliente />} />
       </Routes>
     </>
   );

@@ -48,7 +48,7 @@ public class ControleCliente {
 	}
 
 	@SuppressWarnings("deprecation")
-	@PutMapping("/cliente/atualizar")
+	@PutMapping("/cliente/atualizar/{id}")
 	public ResponseEntity<?> atualizarCliente(@RequestBody Cliente atualizacao) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		Cliente cliente = repositorio.getById(atualizacao.getId());

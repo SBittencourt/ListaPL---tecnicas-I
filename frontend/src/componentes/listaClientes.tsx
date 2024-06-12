@@ -70,7 +70,7 @@ const ListaCliente = () => {
       }
   
       await axios.delete('http://localhost:32831/cliente/excluir', {
-        data: clienteExclusao, // Envia o objeto Cliente no corpo da solicitação
+        data: clienteExclusao, 
       });
   
       setClientes(clientes.filter(cliente => cliente.id !== id));
