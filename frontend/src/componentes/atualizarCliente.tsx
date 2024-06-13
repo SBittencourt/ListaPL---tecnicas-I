@@ -2,6 +2,30 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+interface Telefone {
+    ddd: string;
+    numero: string;
+}
+
+interface Endereco {
+    estado: string;
+    cidade: string;
+    bairro: string;
+    rua: string;
+    numero: string;
+    codigoPostal: string;
+    informacoesAdicionais: string;
+}
+
+interface Cliente {
+    id: string;
+    nome: string;
+    nomeSocial: string;
+    email: string;
+    endereco: Endereco;
+    telefones: Telefone[];
+}
+
 const FormularioAtualizarCliente: React.FC = () => {
     const { id } = useParams<{ id: string }>();
 
@@ -11,13 +35,10 @@ const FormularioAtualizarCliente: React.FC = () => {
         "SP", "SE", "TO"
     ];
 
-    const [cliente, setCliente] = useState({
+    const [cliente, setCliente] = useState<Cliente>({
+        id: '',
         nome: '',
         nomeSocial: '',
-        cpf: '',
-        rg: '',
-        telefoneDDD: '',
-        telefoneNumero: '',
         email: '',
         endereco: {
             estado: '',
@@ -27,7 +48,8 @@ const FormularioAtualizarCliente: React.FC = () => {
             numero: '',
             codigoPostal: '',
             informacoesAdicionais: ''
-        }
+        },
+        telefones: [{ ddd: '', numero: '' }]
     });
 
     useEffect(() => {
@@ -40,7 +62,10 @@ const FormularioAtualizarCliente: React.FC = () => {
                     }
                 });
                 const clienteData = response.data;
-                setCliente(clienteData);
+                setCliente({
+                    ...clienteData,
+                    telefones: clienteData.telefones.length > 0 ? clienteData.telefones : [{ ddd: '', numero: '' }]
+                });
             } catch (error) {
                 console.error('Erro ao obter dados do cliente:', error);
             }
@@ -48,40 +73,49 @@ const FormularioAtualizarCliente: React.FC = () => {
         fetchCliente();
     }, [id]);
     
-    
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        if (name.includes('endereco')) {
+
+        if (name.startsWith('endereco.')) {
+            const key = name.split('.')[1] as keyof Endereco;
             setCliente({
                 ...cliente,
                 endereco: {
                     ...cliente.endereco,
-                    [name.split('.')[1]]: value
+                    [key]: value
                 }
             });
+        } else if (name.startsWith('telefones.')) {
+            const [_, index, field] = name.split('.');
+            const idx = parseInt(index, 10);
+            const key = field as keyof Telefone;
+            const newTelefones = [...cliente.telefones];
+            newTelefones[idx][key] = value;
+            setCliente({
+                ...cliente,
+                telefones: newTelefones
+            });
         } else {
-            setCliente({ ...cliente, [name]: value });
+            const key = name as keyof Cliente;
+            setCliente({ ...cliente, [key]: value });
         }
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:32831/cliente/atualizar/`, cliente); 
+            await axios.put(`http://localhost:32831/cliente/atualizar`, cliente);
             alert('Cliente atualizado com sucesso!');
         } catch (error) {
             alert('Ocorreu um erro ao atualizar o cliente. Por favor, tente novamente mais tarde.');
             console.error('Erro ao atualizar cliente:', error);
         }
     };
-    
 
     return (
         <div className="container">
             <h1>Atualizar Cliente</h1>
             <form onSubmit={handleSubmit}>
-
                 <div className="mb-3">
                     <label htmlFor="nome" className="form-label">Nome *</label>
                     <input type="text" className="form-control" id="nome" name="nome" value={cliente.nome} onChange={handleChange} required />
@@ -89,14 +123,6 @@ const FormularioAtualizarCliente: React.FC = () => {
                 <div className="mb-3">
                     <label htmlFor="nomeSocial" className="form-label">Nome Social</label>
                     <input type="text" className="form-control" id="nomeSocial" name="nomeSocial" value={cliente.nomeSocial} onChange={handleChange} />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="telefoneDDD" className="form-label">Telefone (DDD) *</label>
-                    <input type="text" className="form-control" id="telefoneDDD" name="telefoneDDD" value={cliente.telefoneDDD} onChange={handleChange} required />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="telefoneNumero" className="form-label">Telefone (Número) *</label>
-                    <input type="text" className="form-control" id="telefoneNumero" name="telefoneNumero" value={cliente.telefoneNumero} onChange={handleChange} required />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email</label>
@@ -136,6 +162,15 @@ const FormularioAtualizarCliente: React.FC = () => {
                     <input type="text" className="form-control" id="informacoesAdicionais" name="endereco.informacoesAdicionais" value={cliente.endereco.informacoesAdicionais} onChange={handleChange} />
                 </div>
 
+                {cliente.telefones.map((telefone, index) => (
+                    <div key={index} className="mb-3">
+                        <label htmlFor={`telefones.${index}.ddd`} className="form-label">Telefone (DDD) *</label>
+                        <input type="text" className="form-control" id={`telefones.${index}.ddd`} name={`telefones.${index}.ddd`} value={telefone.ddd} onChange={handleChange} required />
+                        <label htmlFor={`telefones.${index}.numero`} className="form-label">Telefone (Número) *</label>
+                        <input type="text" className="form-control" id={`telefones.${index}.numero`} name={`telefones.${index}.numero`} value={telefone.numero} onChange={handleChange} required />
+                    </div>
+                ))}
+
                 <button type="submit" className="btn btn-primary">Atualizar Cliente</button>
             </form>
         </div>
@@ -143,4 +178,3 @@ const FormularioAtualizarCliente: React.FC = () => {
 };
 
 export default FormularioAtualizarCliente;
-
