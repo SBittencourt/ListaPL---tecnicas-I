@@ -16,13 +16,25 @@ Projeto desenvolvido para a aula de técnicas de programação I da FATEC-SJC, u
 
 ## Como executar
 
+<h2>Back-end</h2>
+
 Entre na pasta sistema e execute os seguintes comandos no terminal:
 
-### `cd sistema`
+### `cd executavel`
+
+### `java -jar pl.jar`
+
+<h2>Front-end</h2>
+
+Entre na pasta sistema e execute os seguintes comandos no terminal:
+
+### `cd frontend`
 
 ### `npm install`
 
 ### `npm start`
+
+Para entrar no sistema, basta colocar um email e senhas qualquer, não há verificação de cadastro no momento.
 
 <hr>
 
