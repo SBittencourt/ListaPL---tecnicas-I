@@ -20,6 +20,8 @@ Entre na pasta sistema e execute os seguintes comandos no terminal:
 
 ### `npm install`
 
+### `npm install typescript`
+
 ### `npx tsc`
 
 ### `node .\out\app\main.js`
